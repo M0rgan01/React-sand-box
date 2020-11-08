@@ -1,3 +1,6 @@
+
+/////// Différente solution de création de composents
+
 // 1er solution
 function WelcomeFunc({name, children}) {
   return <div>

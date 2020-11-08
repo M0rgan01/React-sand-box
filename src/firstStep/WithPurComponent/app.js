@@ -1,3 +1,6 @@
+/////// Création d'un composant 'pur' (ligne 90) -> composant intelligent qui ne re-rend que les champs qui ont été modifiés
+
+
 class Home extends React.Component {
 
   constructor(props) {

@@ -1,3 +1,7 @@
+
+/////// Réutilisation d'un composant pour en créer un autre (ligne 11 / 15 / 42)
+
+
 function Button({ type, children }) {
   const className = 'm-1 btn btn-' + type;
   return <button className={className}>{children}</button>

@@ -1,3 +1,6 @@
+
+/////// Utilisation d'un événement click
+
 class ManualIncrement extends React.Component {
 
   constructor(props) {
