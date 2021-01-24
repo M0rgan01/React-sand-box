@@ -1,4 +1,4 @@
-import { ADD_TODO_ACTION, DELETE_TODO_ACTION, UPDATE_TODO_ACTION } from './todoReducer';
+import { ADD_TODO_ACTION, DELETE_TODO_ACTION, UPDATE_TODO_ACTION } from '../reducer/todoReducer';
 import wait from './wait';
 
 export const toggleTodoAction = (todo) => ({

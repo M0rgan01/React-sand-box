@@ -1,0 +1,52 @@
+import Keycloak from 'keycloak-js';
+import store from '../store';
+import { setKeycloakInstanceAction, setUserProfileAction } from '../store/actions/authActions';
+
+const initOptions: Keycloak.KeycloakConfig = {
+  url: process.env.REACT_APP_KEYCLOAK_AUTH_URL,
+  realm: process.env.REACT_APP_KEYCLOAK_REALM || '',
+  clientId: process.env.REACT_APP_KEYCLOAK_CLIENT_ID || '',
+};
+
+export const keycloak = Keycloak(initOptions);
+
+store.dispatch(setKeycloakInstanceAction(keycloak));
+
+function initRefreshTokenInterval() {
+  const refreshInterval = setInterval(() => {
+    keycloak.updateToken(70).then((refreshed) => {
+
+      if (process.env.NODE_ENV === 'development') {
+        if (refreshed) {
+          console.info('Token refreshed ' + refreshed);
+        } else {
+          console.warn('Token not refreshed, valid for ' + Math.round(keycloak.tokenParsed!.exp! + keycloak.timeSkew! - new Date().getTime() / 1000) + ' seconds');
+        }
+      }
+
+    }).catch(() => {
+      console.error('Failed to refresh token');
+      clearInterval(refreshInterval);
+    });
+  }, 6000);
+}
+
+export default function initKeycloak() {
+  return new Promise<void>((success) => {
+
+    const silentCheckSsoRedirectUri = process.env.REACT_APP_KEYCLOAK_REDIRECT_URL + '/' + process.env.REACT_APP_KEYCLOAK_SILENT_SSO_FILE_NAME;
+
+    keycloak.init({ onLoad: 'check-sso', silentCheckSsoRedirectUri }).then(async (auth) => {
+
+      if (auth) {
+        store.dispatch(setKeycloakInstanceAction(keycloak));
+        const keycloakProfile = await keycloak.loadUserProfile();
+        store.dispatch(setUserProfileAction(keycloakProfile));
+        initRefreshTokenInterval();
+      }
+      success();
+    }).catch(() => {
+      console.error('Authenticated Failed');
+    });
+  });
+}

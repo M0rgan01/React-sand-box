@@ -29,7 +29,7 @@ const initialState = [
     id: 6,
     title: 'Title6',
     complete: false,
-  }
+  },
 ];
 
 let id = initialState.length + 1;
@@ -45,13 +45,13 @@ export function TodoReducer (state = initialState, action) {
     case UPDATE_TODO_ACTION:
       return state.map(value => {
         if (value.id === action.payload.id) {
-          return {...value, ...action.payload}
+          return {...value, ...action.payload};
         } else {
           return value;
         }
       });
     case DELETE_TODO_ACTION:
-      return state.filter(value => value.id !== action.payload)
+      return state.filter(value => value.id !== action.payload);
     default:
       return state;
   }
