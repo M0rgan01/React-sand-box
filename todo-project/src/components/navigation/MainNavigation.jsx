@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import Button from '@material-ui/core/Button';
 import { NavLink } from 'react-router-dom';
-import { ExitToApp, KeyboardBackspace, LockOpen } from '@material-ui/icons';
-import { TODOS } from './routing/routes';
+import { ExitToApp, Home, KeyboardBackspace, LockOpen } from '@material-ui/icons';
+import { TODOS, WELCOME } from './routing/routes';
 import Box from '@material-ui/core/Box';
 import { useSelector } from 'react-redux';
 import { isAuthenticatedSelector, loginSelector, logoutSelector } from '../../store/selectors/authSelectors';
-import { red, lightGreen } from '@material-ui/core/colors';
+import { lightGreen, red } from '@material-ui/core/colors';
 
 export default function MainNavigation() {
 
@@ -26,13 +26,20 @@ export default function MainNavigation() {
   return <Box display={'flex'} justifyContent={'center'}>
     { auth ?
       <div>
-        <Button startIcon={<KeyboardBackspace/>}
+        <Button startIcon={<Home/>}
                 variant={'contained'}
-                style={{marginRight: 10}}
                 component={NavLink}
-                to={TODOS}>
-          Todos
+                to={WELCOME}>
+          Home
         </Button>
+        <Box display={'inline'} mx={2}>
+          <Button startIcon={<KeyboardBackspace/>}
+                  variant={'contained'}
+                  component={NavLink}
+                  to={TODOS}>
+            Todos
+          </Button>
+        </Box>
         <Button startIcon={<ExitToApp/>}
                 onClick={onLogout}
                 style={{background: red[700], color: 'white'}}
