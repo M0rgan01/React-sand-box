@@ -21,7 +21,7 @@ import red from '@material-ui/core/colors/red';
 export default function Todo() {
 
   const { register, handleSubmit, formState, reset } = useForm({ mode: 'onChange' });
-  const todos = useSelector(todosSelector);
+  const todos = useSelector(todosSelector) || [];
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
