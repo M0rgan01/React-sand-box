@@ -13,9 +13,13 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    initKeycloak()
-      .then(() => service.fetchTodos()
-        .then(() => setLoading(false)));
+    initKeycloak().then((isAuth) => {
+      if (isAuth) {
+        service.fetchTodos().then(() => setLoading(false));
+      } else {
+        setLoading(false);
+      }
+    });
   }, []);
 
   if (loading) {

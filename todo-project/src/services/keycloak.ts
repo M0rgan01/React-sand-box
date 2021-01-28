@@ -32,7 +32,7 @@ function initRefreshTokenInterval() {
 }
 
 export default function initKeycloak() {
-  return new Promise<void>((success) => {
+  return new Promise<boolean>((isAuth, reject) => {
 
     const silentCheckSsoRedirectUri = process.env.REACT_APP_KEYCLOAK_REDIRECT_URL + '/' + process.env.REACT_APP_KEYCLOAK_SILENT_SSO_FILE_NAME;
 
@@ -44,9 +44,10 @@ export default function initKeycloak() {
         store.dispatch(setUserProfileAction(keycloakProfile));
         initRefreshTokenInterval();
       }
-      success();
+      isAuth(auth);
     }).catch(() => {
       console.error('Authenticated Failed');
+      reject();
     });
   });
 }
