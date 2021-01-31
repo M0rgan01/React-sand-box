@@ -25,3 +25,7 @@ ComponentTitle.propTypes = {
   variant: PropTypes.string,
   marginBottom: PropTypes.number,
 };
+
+ComponentTitle.defaultProps = {
+  title: "Coucou, c'est le titre par défaut",
+};
