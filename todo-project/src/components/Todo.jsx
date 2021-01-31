@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -17,13 +17,19 @@ import { addTodoAction, deleteTodoAction, toggleTodoAction } from '../store/acti
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import red from '@material-ui/core/colors/red';
+import { Service } from '../services/Service';
 
 export default function Todo() {
 
+  const service = new Service();
   const { register, handleSubmit, formState, reset } = useForm({ mode: 'onChange' });
   const todos = useSelector(todosSelector) || [];
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    service.fetchTodos().then(() => setLoading(false));
+  }, []);
 
   const onCreate = async (data) => {
     setLoading(true);

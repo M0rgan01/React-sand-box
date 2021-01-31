@@ -1,4 +1,5 @@
 
+// ensemble de tests
 describe('Pack démo', () => {
 
   beforeEach(() => {
@@ -14,7 +15,8 @@ describe('Pack démo', () => {
     expect(a).toBe(4);
   });
 
-  test('testDemo2', () => {
+  // it est un alias de test
+  it('testDemo2', () => {
     const a = 2 + 2;
     expect(a).toBe(4);
   });

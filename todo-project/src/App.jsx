@@ -5,20 +5,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { AppRoutes } from './components/navigation/routing/AppRoutes';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MainNavigation from './components/navigation/MainNavigation';
-import { Service } from './services/Service';
 
 function App() {
 
-  const service = new Service();
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    initKeycloak().then((isAuth) => {
-      if (isAuth) {
-        service.fetchTodos().then(() => setLoading(false));
-      } else {
-        setLoading(false);
-      }
+    initKeycloak().then(() => {
+      setLoading(false);
     });
   }, []);
 
