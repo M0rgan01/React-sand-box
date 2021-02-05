@@ -1,8 +1,9 @@
 import SafeService from './SafeService';
 import axiosInstance from '../plugins/axios';
-import { TODOS } from '../plugins/urls';
+import { TODO, TODOS } from '../plugins/urls';
 import store from '../store';
-import { setTodosAction } from '../store/actions/todosActions';
+import { addTodoAction, setTodosAction } from '../store/actions/todosActions';
+import { v4 } from 'uuid';
 
 export class Service extends SafeService {
 
@@ -12,4 +13,13 @@ export class Service extends SafeService {
       store.dispatch(setTodosAction(todos));
     }, callBack);
   }
+
+  async postTodos(title: string, callBack?: () => void): Promise<void> {
+    await this.safeCall(async () => {
+      const todo = { title, id: v4() };
+      await axiosInstance.post(TODO, todo);
+      store.dispatch(addTodoAction(todo));
+    }, callBack);
+  }
+
 }

@@ -16,9 +16,9 @@ export const setTodosAction = (todos) => ({
 });
 
 // without async call
-export const addTodoAction = (title) => ({
+export const addTodoAction = (todo) => ({
   type: ADD_TODO_ACTION,
-  payload: title,
+  payload: todo,
 });
 
 // with async call (redux-thunk)

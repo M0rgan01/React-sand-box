@@ -33,7 +33,7 @@ export default function Todo() {
 
   const onCreate = async (data) => {
     setLoading(true);
-    dispatch(addTodoAction(data.title));
+    await service.postTodos(data.title);
     reset();
     setLoading(false);
   };
