@@ -13,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import { useForm } from 'react-hook-form';
 import { LoadingButton } from './common/LoadingButton';
 import Box from '@material-ui/core/Box';
-import { addTodoAction, deleteTodoAction, toggleTodoAction } from '../store/actions/todosActions';
+import { deleteTodoAction, toggleTodoAction } from '../store/actions/todosActions';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import red from '@material-ui/core/colors/red';
@@ -51,8 +51,7 @@ export default function Todo() {
     setLoading(false);
   };
 
-  return <div>
-    <List component="nav"
+  return <List component="nav"
           style={{ backgroundColor: grey[300], borderRadius: 5, padding: '10px' }}
           aria-label="main mailbox folders">
       {todos.map(todo =>
@@ -107,6 +106,5 @@ export default function Todo() {
           </form>
         </ListItemText>
       </ListItem>
-    </List>
-  </div>;
+    </List>;
 }
