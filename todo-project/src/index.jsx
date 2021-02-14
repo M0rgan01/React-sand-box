@@ -5,12 +5,16 @@ import ErrorCatching from './components/ErrorCatching';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store';
+import './app.css';
 
 ReactDOM.render(
   <div>
+    <canvas id="backgroundAnimate"/>
     <Provider store={store}>
       <ErrorCatching>
-        <App />
+        <div id="app">
+          <App/>
+        </div>
       </ErrorCatching>
     </Provider>
   </div>,

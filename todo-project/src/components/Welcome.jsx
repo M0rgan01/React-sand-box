@@ -5,7 +5,6 @@ import { ComponentTitle } from './common/ComponentTitle';
 import { useSelector } from 'react-redux';
 import { isAuthenticatedSelector } from '../store/selectors/authSelectors';
 
-
 export default function Welcome() {
 
   const auth = useSelector(isAuthenticatedSelector);

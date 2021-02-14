@@ -11,8 +11,13 @@ export const userIdSelector = ({auth}) => auth.keycloakInstance.subject;
 export const loginSelector = ({auth}) => auth.keycloakInstance.login;
 export const logoutSelector = ({auth}) => auth.keycloakInstance.logout;
 export const profileUrlSelector = ({auth}) => {
-  const authData = auth.keycloakInstance.tokenParsed;
-  return `${authData.iss}/account?referrer=${authData.azp}`;
+  if (auth.keycloakInstance.authenticated) {
+    const authData = auth.keycloakInstance.tokenParsed;
+    return `${authData.iss}/account?referrer=${authData.azp}`;
+  } else {
+    return null;
+  }
+
 };
 export const tokenSelector = ({auth}) => auth.keycloakInstance.token;
 export const realmSelector = ({auth}) => auth.keycloakInstance.realm;

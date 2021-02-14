@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import initKeycloak from './services/keycloak';
 import { Box } from '@material-ui/core';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { AppRoutes } from './components/navigation/routing/AppRoutes';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MainNavigation from './components/navigation/MainNavigation';
+import { resizeCanvas } from './plugins/animeBackground';
 
 function App() {
-
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    window.addEventListener('resize', resizeCanvas);
     initKeycloak().then(() => {
       setLoading(false);
     });
@@ -20,13 +20,12 @@ function App() {
   if (loading) {
     return (
       <Box minHeight={'100vh'} display={'flex'} justifyContent={'center'} alignItems={'center'}>
-        <CircularProgress style={{ color: 'blue' }} size={60}/>
+        <div className="loading"/>
       </Box>
     );
   } else {
     return (
       <Router>
-        <Box mt={6}/>
         <MainNavigation/>
         <Box mt={6}/>
         <Box display={'flex'}>
