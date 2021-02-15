@@ -15,6 +15,7 @@ function App() {
     initKeycloak().then(() => {
       setLoading(false);
     });
+
   }, []);
 
   if (loading) {
@@ -27,7 +28,7 @@ function App() {
     return (
       <Router>
         <MainNavigation/>
-        <Box mt={6}/>
+        <Box id="header-bottom"/>
         <Box display={'flex'}>
           <AppRoutes/>
         </Box>

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { NavLink } from 'react-router-dom';
 import { AccountCircle, ExitToApp, Home, KeyboardBackspace, LockOpen } from '@material-ui/icons';
@@ -13,6 +13,14 @@ import {
 } from '../../store/selectors/authSelectors';
 import { lightGreen, red } from '@material-ui/core/colors';
 import { animateBack } from '../../plugins/animeBackground';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+
+function resizeHeader() {
+  const header = document.getElementById('header');
+  const headerBottom = document.getElementById('header-bottom');
+  const headerHeight = header.clientHeight;
+  headerBottom.style.paddingTop = (headerHeight + 30) + 'px';
+}
 
 export default function MainNavigation() {
 
@@ -22,61 +30,75 @@ export default function MainNavigation() {
   const auth = useSelector(isAuthenticatedSelector);
   const logoutRedirectUri = process.env.REACT_APP_KEYCLOAK_REDIRECT_URL;
 
+  useEffect(() => {
+    resizeHeader();
+    window.addEventListener('resize', resizeHeader);
+  }, []);
+
   const onLogin = useCallback(() => {
     login();
   }, []);
 
   const onOpenProfile = useCallback(() => {
     window.open(profileUrl,
-      '_blank',
+        '_blank',
     );
   }, []);
 
   const onLogout = useCallback(() => {
-    logout({ redirectUri: logoutRedirectUri });
+    logout({redirectUri: logoutRedirectUri});
   }, []);
 
-  return <Box display={'flex'} justifyContent={'center'} pt={6}>
-    {auth ?
-      <div>
-        <Button startIcon={<Home/>}
-                variant={'contained'}
-                component={NavLink}
-                onClick={event => animateBack(event, 'blue')}
-                to={WELCOME}>
-          Home
-        </Button>
-        <Box display={'inline'} ml={2}>
-          <Button startIcon={<KeyboardBackspace/>}
-                  variant={'contained'}
-                  component={NavLink}
-                  onClick={event => animateBack(event, 'red')}
-                  to={TODOS}>
-            Todos
-          </Button>
-        </Box>
-        <Box display={'inline'} mx={2}>
-          <Button startIcon={<AccountCircle/>}
-                  onClick={onOpenProfile}
-                  style={{ background: lightGreen[700], color: 'white' }}
-                  variant={'contained'}>
-            Account
-          </Button>
-        </Box>
-        <Button startIcon={<ExitToApp/>}
-                onClick={onLogout}
-                style={{ background: red[700], color: 'white' }}
-                variant={'contained'}>
-          Logout
-        </Button>
-      </div>
-      :
-      <Button startIcon={<LockOpen/>}
-              onClick={onLogin}
-              style={{ background: lightGreen[700], color: 'white' }}
-              variant={'contained'}>
-        Login
-      </Button>
-    }
+  return <Box position="fixed" top="0" width="100%" id="header">
+    <Box display={'flex'} justifyContent={'center'} pt={3} flexWrap={'wrap'}>
+      {auth ?
+          <>
+            <Box display={'inline'} m={1}>
+              <Button startIcon={<Home/>}
+                      variant={'contained'}
+                      component={NavLink}
+                      onClick={event => animateBack(event, 'blue')}
+                      to={WELCOME}>
+                Home
+              </Button>
+            </Box>
+            <Box display={'inline'} m={1}>
+              <Button startIcon={<KeyboardBackspace/>}
+                      variant={'contained'}
+                      component={NavLink}
+                      style={{background: lightBlue[700], color: 'white'}}
+                      onClick={event => animateBack(event, 'red')}
+                      to={TODOS}>
+                Todos
+              </Button>
+            </Box>
+            <Box display={'inline'} m={1}>
+              <Button startIcon={<AccountCircle/>}
+                      onClick={onOpenProfile}
+                      style={{background: lightGreen[700], color: 'white'}}
+                      variant={'contained'}>
+                Account
+              </Button>
+            </Box>
+            <Box display={'inline'} m={1}>
+              <Button startIcon={<ExitToApp/>}
+                      onClick={onLogout}
+                      style={{background: red[700], color: 'white'}}
+                      variant={'contained'}>
+                Logout
+              </Button>
+            </Box>
+          </>
+          :
+          <Box display={'inline'} m={1}>
+            <Button startIcon={<LockOpen/>}
+                    onClick={onLogin}
+                    style={{background: lightGreen[700], color: 'white'}}
+                    variant={'contained'}>
+              Login
+            </Button>
+          </Box>
+      }
+    </Box>
   </Box>;
 }
