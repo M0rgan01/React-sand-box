@@ -1,3 +1,5 @@
+// https://tobiasahlin.com/moving-letters/
+// https://codepen.io/alexzaworski/pen/mEkvAG
 import anime from 'animejs';
 
 let background;
