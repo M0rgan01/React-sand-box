@@ -1,6 +1,6 @@
 import Keycloak from 'keycloak-js';
 import store from '../store';
-import { setKeycloakInstanceAction, setUserProfileAction } from '../store/actions/authActions';
+import { setKeycloakInstanceAction, setUserProfileAction, UpdateTokenAction } from '../store/actions/authActions';
 
 const initOptions: Keycloak.KeycloakConfig = {
   url: process.env.REACT_APP_KEYCLOAK_AUTH_URL,
@@ -18,6 +18,9 @@ function initRefreshTokenInterval() {
 
       if (process.env.NODE_ENV === 'development') {
         if (refreshed) {
+
+          store.dispatch(UpdateTokenAction(keycloak.token));
+
           console.info('Token refreshed ' + refreshed);
         } else {
           console.warn('Token not refreshed, valid for ' + Math.round(keycloak.tokenParsed!.exp! + keycloak.timeSkew! - new Date().getTime() / 1000) + ' seconds');
