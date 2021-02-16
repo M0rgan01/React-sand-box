@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import initKeycloak from './services/keycloak';
+import initKeycloak from './plugins/keycloak';
 import { Box } from '@material-ui/core';
 import { AppRoutes } from './components/navigation/routing/AppRoutes';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import MainNavigation from './components/navigation/MainNavigation';
 import { resizeCanvas } from './plugins/animeBackground';
+import history from './plugins/history';
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
     );
   } else {
     return (
-      <Router>
+      <Router history={history}>
         <MainNavigation/>
         <Box id="header-bottom"/>
         <Box display={'flex'}>

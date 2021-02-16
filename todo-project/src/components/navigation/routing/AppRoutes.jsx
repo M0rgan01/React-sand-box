@@ -1,8 +1,7 @@
 import { Redirect, Switch } from 'react-router-dom';
 import React from 'react';
-import { FORBIDDEN, TODOS, WELCOME } from './routes';
-import Forbidden from '../Forbidden';
-import FourOFour from '../FourOFour';
+import { ERROR, TODOS, WELCOME } from './routes';
+import Error from '../Error';
 import Todo from '../../Todo';
 import Welcome from '../../Welcome';
 import { CustomRoute } from './CustomRoute';
@@ -17,11 +16,11 @@ export function AppRoutes() {
     
     <CustomRoute component={Welcome} path={WELCOME}/>
 
-    <CustomRoute component={Forbidden} path={FORBIDDEN}/>
+    <CustomRoute component={Error} path={ERROR}/>
 
     <PrivateRoute component={Todo} path={TODOS}/>
 
-    <CustomRoute path="*" component={FourOFour}/>
+    <CustomRoute path="*" component={Error}/>
 
   </Switch>;
 }

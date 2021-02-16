@@ -5,7 +5,7 @@ import React from 'react';
 import { useLocation } from 'react-router';
 import { CustomRoute } from './CustomRoute';
 import PropTypes from 'prop-types';
-import { FORBIDDEN } from './routes';
+import { ERROR } from './routes';
 
 export function PrivateRoute({size, notMaster, ...rest}) {
 
@@ -13,7 +13,7 @@ export function PrivateRoute({size, notMaster, ...rest}) {
   const location = useLocation();
 
   if (!auth) {
-    return <Redirect to={FORBIDDEN} from={location.pathname}/>;
+    return <Redirect to={ERROR} from={location.pathname}/>;
   } else {
     return <CustomRoute size={size} {...rest} />;
   }

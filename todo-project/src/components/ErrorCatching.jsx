@@ -20,7 +20,7 @@ export default class ErrorCatching extends React.Component {
 
   render() {
     if (this.state.error) {
-      return (<div>
+      return (<div style={{position: 'relative'}}>
         Une erreur est survenue
       </div>);
     }
