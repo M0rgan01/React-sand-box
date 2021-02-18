@@ -33,7 +33,6 @@ export default function Error() {
 
   const title = type ? defineTitle(type) : '404 Not found';
 
-
   return <div>
     <ComponentTitle title={title} icon={<LiveHelp fontSize={'large'}/>}/>
     <Button startIcon={<KeyboardBackspace/>} component={NavLink} to={WELCOME}>

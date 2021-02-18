@@ -14,6 +14,7 @@ import {
 import { lightGreen, red } from '@material-ui/core/colors';
 import { animateBack } from '../../plugins/animeBackground';
 import lightBlue from '@material-ui/core/colors/lightBlue';
+import { Slide } from '@material-ui/core';
 
 function resizeHeader() {
   const header = document.getElementById('header');
@@ -41,17 +42,20 @@ export default function MainNavigation() {
 
   const onOpenProfile = useCallback(() => {
     window.open(profileUrl,
-        '_blank',
+      '_blank',
     );
   }, []);
 
   const onLogout = useCallback(() => {
-    logout({redirectUri: logoutRedirectUri});
+    logout({ redirectUri: logoutRedirectUri });
   }, []);
 
-  return <Box position="fixed" top="0" width="100%" id="header">
-    <Box display={'flex'} justifyContent={'center'} pt={3} flexWrap={'wrap'}>
-      {auth ?
+  throw new Error('e');
+
+  return <Slide direction="right" in={true} mountOnEnter>
+    <Box position="fixed" top="0" width="100%" id="header">
+      <Box display={'flex'} justifyContent={'center'} pt={3} flexWrap={'wrap'}>
+        {auth ?
           <>
             <Box display={'inline'} m={1}>
               <Button startIcon={<Home/>}
@@ -66,7 +70,7 @@ export default function MainNavigation() {
               <Button startIcon={<KeyboardBackspace/>}
                       variant={'contained'}
                       component={NavLink}
-                      style={{background: lightBlue[700], color: 'white'}}
+                      style={{ background: lightBlue[700], color: 'white' }}
                       onClick={event => animateBack(event, 'red')}
                       to={TODOS}>
                 Todos
@@ -75,7 +79,7 @@ export default function MainNavigation() {
             <Box display={'inline'} m={1}>
               <Button startIcon={<AccountCircle/>}
                       onClick={onOpenProfile}
-                      style={{background: lightGreen[700], color: 'white'}}
+                      style={{ background: lightGreen[700], color: 'white' }}
                       variant={'contained'}>
                 Account
               </Button>
@@ -83,7 +87,7 @@ export default function MainNavigation() {
             <Box display={'inline'} m={1}>
               <Button startIcon={<ExitToApp/>}
                       onClick={onLogout}
-                      style={{background: red[700], color: 'white'}}
+                      style={{ background: red[700], color: 'white' }}
                       variant={'contained'}>
                 Logout
               </Button>
@@ -93,12 +97,13 @@ export default function MainNavigation() {
           <Box display={'inline'} m={1}>
             <Button startIcon={<LockOpen/>}
                     onClick={onLogin}
-                    style={{background: lightGreen[700], color: 'white'}}
+                    style={{ background: lightGreen[700], color: 'white' }}
                     variant={'contained'}>
               Login
             </Button>
           </Box>
-      }
+        }
+      </Box>
     </Box>
-  </Box>;
+  </Slide>;
 }
