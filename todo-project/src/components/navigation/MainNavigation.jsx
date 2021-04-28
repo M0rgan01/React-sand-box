@@ -50,8 +50,6 @@ export default function MainNavigation() {
     logout({ redirectUri: logoutRedirectUri });
   }, []);
 
-  throw new Error('e');
-
   return <Slide direction="right" in={true} mountOnEnter>
     <Box position="fixed" top="0" width="100%" id="header">
       <Box display={'flex'} justifyContent={'center'} pt={3} flexWrap={'wrap'}>

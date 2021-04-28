@@ -3,24 +3,17 @@ import Button from '@material-ui/core/Button';
 import { NavLink } from 'react-router-dom';
 import { KeyboardBackspace, LiveHelp } from '@material-ui/icons';
 import { ComponentTitle } from '../common/ComponentTitle';
-import {
-  ERROR_FORBIDDEN,
-  ERROR_NOT_FOUND,
-  ERROR_UNAUTHORIZED,
-  ERROR_UNKNOWN,
-  useQuery,
-  WELCOME,
-} from './routing/routes';
+import { FORBIDDEN, NOT_FOUND, UNAUTHORIZED, UNKNOWN, useQuery, WELCOME, } from './routing/routes';
 
 function defineTitle(type) {
   switch (type) {
-    case ERROR_FORBIDDEN:
+    case FORBIDDEN:
       return '403 Forbidden';
-    case ERROR_UNAUTHORIZED:
+    case UNAUTHORIZED:
       return '401 Unauthorized';
-    case ERROR_NOT_FOUND:
+    case NOT_FOUND:
       return '404 Not found';
-    case ERROR_UNKNOWN:
+    case UNKNOWN:
       return 'An error has occurred';
     default:
       return '404 Not found';
@@ -30,7 +23,6 @@ function defineTitle(type) {
 export default function Error() {
 
   const type = useQuery().get('type');
-
   const title = type ? defineTitle(type) : '404 Not found';
 
   return <div>
