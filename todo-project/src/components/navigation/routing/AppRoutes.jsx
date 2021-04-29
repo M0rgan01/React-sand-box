@@ -8,19 +8,20 @@ import { CustomRoute } from './CustomRoute';
 import { PrivateRoute } from './PrivateRoute';
 
 export function AppRoutes() {
+
   return <Switch>
 
     <CustomRoute exact path='/'>
-      <Redirect to={WELCOME}/>
+      <Redirect to={ WELCOME }/>
     </CustomRoute>
-    
-    <CustomRoute component={Welcome} path={WELCOME}/>
 
-    <CustomRoute component={Error} path={ERROR}/>
+    <CustomRoute component={ Welcome } path={ WELCOME }/>
 
-    <PrivateRoute component={Todo} path={TODOS}/>
+    <CustomRoute component={ Error } path={ ERROR }/>
 
-    <CustomRoute path="*" component={Error}/>
+    <PrivateRoute component={ Todo } path={ TODOS }/>
+
+    <CustomRoute path='*' component={ Error }/>
 
   </Switch>;
 }

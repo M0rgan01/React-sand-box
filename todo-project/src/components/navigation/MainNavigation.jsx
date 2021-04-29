@@ -12,9 +12,9 @@ import {
   profileUrlSelector,
 } from '../../store/selectors/authSelectors';
 import { lightGreen, red } from '@material-ui/core/colors';
-import { animateBack } from '../../plugins/animeBackground';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import { Slide } from '@material-ui/core';
+import { CustomLink } from './routing/CustomLink';
 
 function resizeHeader() {
   const header = document.getElementById('header');
@@ -56,23 +56,23 @@ export default function MainNavigation() {
         {auth ?
           <>
             <Box display={'inline'} m={1}>
-              <Button startIcon={<Home/>}
-                      variant={'contained'}
-                      component={NavLink}
-                      onClick={event => animateBack(event, 'blue')}
-                      to={WELCOME}>
-                Home
-              </Button>
+              <CustomLink to={WELCOME} component={
+                <Button startIcon={<Home/>}
+                        variant={'contained'}>
+                  Home
+                </Button>
+              }>
+              </CustomLink>
             </Box>
             <Box display={'inline'} m={1}>
-              <Button startIcon={<KeyboardBackspace/>}
-                      variant={'contained'}
-                      component={NavLink}
-                      style={{ background: lightBlue[700], color: 'white' }}
-                      onClick={event => animateBack(event, 'red')}
-                      to={TODOS}>
-                Todos
-              </Button>
+              <CustomLink to={TODOS} component={
+                <Button startIcon={<KeyboardBackspace/>}
+                        variant={'contained'}
+                        style={{ background: lightBlue[700], color: 'white' }}>
+                  Todos
+                </Button>
+              }>
+              </CustomLink>
             </Box>
             <Box display={'inline'} m={1}>
               <Button startIcon={<AccountCircle/>}
