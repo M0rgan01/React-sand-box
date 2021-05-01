@@ -95,7 +95,7 @@ export const showOverlay = options => {
       options.fill = getRandomColor();
     }
 
-    overlay.c.style.display = 'block';
+    overlay.c.style.zIndex = '2';
     overlay.lastStartingPoint = options.position;
 
     options.targetRadius = calcPageFillRadius(options.position.x, options.position.y);
@@ -132,7 +132,7 @@ export const hideOverlay = opt => {
 
     const callback = options.complete;
     options.complete = () => {
-      overlay.c.style.display = 'none';
+      overlay.c.style.zIndex = '0';
       overlay.bgColor = 'transparent';
       if (callback) callback();
     };
@@ -166,6 +166,5 @@ export function clickPosition(e) {
     y: rect.left + (rect.right - rect.left) / 2,
   };
 }
-
 
 export const Overlay = overlay;
