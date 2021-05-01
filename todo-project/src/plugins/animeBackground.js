@@ -3,10 +3,12 @@ import anime from 'animejs';
 // https://tobiasahlin.com/moving-letters/
 // https://codepen.io/alexzaworski/pen/mEkvAG
 
+export const minCoverDuration = 750;
 let colors = ['green', 'blue', 'red'];
 let overlay = {};
 overlay.circle = {};
-overlay.open = false;
+overlay.open = true;
+overlay.init = false;
 
 function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
@@ -41,7 +43,7 @@ overlay.circle.draw = function (options) {
 };
 
 overlay.animateFill = (options) => {
-  const minCoverDuration = 750;
+
   overlay.bgColor = options.fill;
 
   overlay.circle.x = options.position.x;
@@ -67,40 +69,78 @@ overlay.animateFill = (options) => {
 export const onAppInit = () => {
   overlay.c = document.getElementById('backgroundAnimate');
   overlay.ctx = overlay.c.getContext('2d');
-  overlay.bgColor = 'transparent';
+  overlay.bgColor = getRandomColor();
+  overlay.c.style.zIndex = '1';
   overlay.resizeCanvas();
   overlay.lastStartingPoint = { x: 0, y: 0 };
   window.addEventListener('resize', overlay.resizeCanvas);
+  overlay.init = true;
 };
 
 
 export const show = options => {
-  overlay.c.style.display = 'block';
-  overlay.lastStartingPoint = options.position;
+  if (overlay.init) {
 
-  options.targetRadius = overlay.calcPageFillRadius(options.position.x, options.position.y);
-  options.startRadius = 0;
-  options.easing = 'easeOutQuart';
-  overlay.animateFill(options);
+    if (!options.position) {
+      if (overlay.x && overlay.y) {
+        options.position = { x: overlay.x, y: overlay.y };
+      } else {
+        const x = window.innerWidth / 2;
+        const y = window.innerHeight / 2;
+        options.position = { x, y };
+      }
+    }
+
+    if (!options.fill) {
+      options.fill = getRandomColor();
+    }
+
+    overlay.c.style.display = 'block';
+    overlay.lastStartingPoint = options.position;
+
+    options.targetRadius = overlay.calcPageFillRadius(options.position.x, options.position.y);
+    options.startRadius = 0;
+    options.easing = 'easeOutQuart';
+    overlay.animateFill(options);
+    overlay.open = true;
+  }
 };
 
 // Hide the overlay. Args:
 // fill: color to animate with
 // position: position to target as the circle shrinks
 // complete: completion callback
-export const hide = options => {
-  options.targetRadius = 0;
-  options.easing = 'easeInOutQuart';
+export const hide = opt => {
+  if (overlay.init) {
 
-  const callback = options.complete;
-  options.complete = () => {
-    overlay.c.style.display = 'none';
-    overlay.bgColor = 'transparent';
-    if (callback) callback();
-  };
+    let options = opt || {};
 
-  options.startRadius = overlay.calcPageFillRadius(options.position.x, options.position.y);
-  overlay.animateFill(options);
+    options.targetRadius = 0;
+    options.easing = 'easeInOutQuart';
+
+    if (!options.position) {
+      if (overlay.x && overlay.y) {
+        options.position = { x: overlay.x, y: overlay.y };
+        overlay.x = null;
+        overlay.y = null;
+      } else {
+        const x = window.innerWidth / 2;
+        const y = window.innerHeight / 2;
+        options.position = { x, y };
+      }
+    }
+
+    const callback = options.complete;
+    options.complete = () => {
+      overlay.c.style.display = 'none';
+      overlay.bgColor = 'transparent';
+      if (callback) callback();
+    };
+
+    options.startRadius = overlay.calcPageFillRadius(options.position.x, options.position.y);
+    overlay.animateFill(options);
+    overlay.open = false;
+  }
 };
 
 export function clickPosition(e) {
@@ -110,9 +150,11 @@ export function clickPosition(e) {
   }
 
   if (event.clientX && event.clientY) {
+    overlay.x = event.clientX;
+    overlay.y = event.clientY;
     return {
-      x: event.clientX,
-      y: event.clientY,
+      x: overlay.x,
+      y: overlay.y,
     };
   }
 
@@ -125,7 +167,7 @@ export function clickPosition(e) {
   };
 }
 
-export const animate = (event) => {
+export const animateToggle = (event) => {
   const position = clickPosition(event);
 
   if (overlay.open) {
@@ -136,3 +178,5 @@ export const animate = (event) => {
   }
   overlay.open = !overlay.open;
 };
+
+export const Overlay = overlay;
