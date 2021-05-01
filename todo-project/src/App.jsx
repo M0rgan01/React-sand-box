@@ -6,24 +6,22 @@ import { Router } from 'react-router-dom';
 import MainNavigation from './components/navigation/MainNavigation';
 import history from './plugins/history';
 import { onAppInit } from './plugins/animeBackground';
+import CentralLoading from './components/navigation/CentralLoading';
 
 function App() {
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    onAppInit();
     initKeycloak().then(() => {
-      onAppInit();
       setLoading(false);
     });
-
   }, []);
 
   if (loading) {
     return (
-        <Box minHeight={ '100vh' } display={ 'flex' } justifyContent={ 'center' } alignItems={ 'center' }>
-          <div className="loading"/>
-        </Box>
+        <CentralLoading/>
     );
   } else {
     return (

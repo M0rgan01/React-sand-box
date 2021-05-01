@@ -1,15 +1,18 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { animate } from '../../../plugins/animeBackground';
+import { clickPosition, show } from '../../../plugins/animeBackground';
+import { useHistory } from 'react-router-dom';
 
 export function CustomLink({ to, component }) {
 
+  let history = useHistory();
+
   const fillBackground = (event) => {
-    animate(event);
+    clickPosition(event);
+    show({ complete: () => history.push(to) });
   };
 
-  return <Link to={ to } onClick={ (e) => fillBackground(e) }>{ component }</Link>;
+  return <span onClick={ event => fillBackground(event) }>{ component }</span>;
 }
 
 CustomLink.propTypes = {

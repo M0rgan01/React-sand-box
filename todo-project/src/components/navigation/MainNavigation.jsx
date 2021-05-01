@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import { NavLink } from 'react-router-dom';
 import { AccountCircle, ExitToApp, Home, KeyboardBackspace, LockOpen } from '@material-ui/icons';
 import { TODOS, WELCOME } from './routing/routes';
 import Box from '@material-ui/core/Box';
