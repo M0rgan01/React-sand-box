@@ -1,9 +1,9 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { NavLink } from 'react-router-dom';
 import { KeyboardBackspace, LiveHelp } from '@material-ui/icons';
 import { ComponentTitle } from '../common/ComponentTitle';
-import { FORBIDDEN, NOT_FOUND, UNAUTHORIZED, UNKNOWN, useQuery, WELCOME, } from './routing/routes';
+import { FORBIDDEN, NOT_FOUND, UNAUTHORIZED, UNKNOWN, useQuery, WELCOME } from './routing/routes';
+import { CustomLink } from './routing/CustomLink';
 
 function defineTitle(type) {
   switch (type) {
@@ -26,9 +26,10 @@ export default function Error() {
   const title = type ? defineTitle(type) : '404 Not found';
 
   return <div>
-    <ComponentTitle title={title} icon={<LiveHelp fontSize={'large'}/>}/>
-    <Button startIcon={<KeyboardBackspace/>} component={NavLink} to={WELCOME}>
-      back to home
-    </Button>
+    <ComponentTitle title={ title } icon={ <LiveHelp fontSize={ 'large' }/> }/>
+    <CustomLink to={ WELCOME }
+                component={ <Button startIcon={ <KeyboardBackspace/> }>
+                  back to home
+                </Button> }/>
   </div>;
 }

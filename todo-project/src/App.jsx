@@ -6,7 +6,7 @@ import { Router } from 'react-router-dom';
 import MainNavigation from './components/navigation/MainNavigation';
 import history from './plugins/history';
 import { onAppInit } from './plugins/animeBackground';
-import CentralLoading from './components/navigation/CentralLoading';
+import CentralLoading from './components/common/CentralLoading';
 
 function App() {
 

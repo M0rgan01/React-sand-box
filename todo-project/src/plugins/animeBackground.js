@@ -14,13 +14,13 @@ function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-overlay.calcPageFillRadius = function (x, y) {
+function calcPageFillRadius(x, y) {
   const l = Math.max(x - 0, overlay.cW - x);
   const h = Math.max(y - 0, overlay.cH - y);
   return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
-};
+}
 
-overlay.resizeCanvas = function () {
+function resizeCanvas() {
   overlay.cW = window.innerWidth;
   overlay.cH = window.innerHeight;
   overlay.c.width = overlay.cW * window.devicePixelRatio;
@@ -28,7 +28,7 @@ overlay.resizeCanvas = function () {
   overlay.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
   overlay.ctx.fillStyle = overlay.bgColor;
   overlay.ctx.fillRect(0, 0, overlay.cW, overlay.cH);
-};
+}
 
 overlay.circle.draw = function (options) {
   if (options.targetRadius < options.startRadius) {
@@ -42,7 +42,7 @@ overlay.circle.draw = function (options) {
   overlay.ctx.closePath();
 };
 
-overlay.animateFill = (options) => {
+function animateFill(options) {
 
   overlay.bgColor = options.fill;
 
@@ -64,21 +64,21 @@ overlay.animateFill = (options) => {
       targetRadius: options.targetRadius,
     }),
   });
-};
+}
 
 export const onAppInit = () => {
   overlay.c = document.getElementById('backgroundAnimate');
   overlay.ctx = overlay.c.getContext('2d');
   overlay.bgColor = getRandomColor();
   overlay.c.style.zIndex = '1';
-  overlay.resizeCanvas();
+  resizeCanvas();
   overlay.lastStartingPoint = { x: 0, y: 0 };
-  window.addEventListener('resize', overlay.resizeCanvas);
+  window.addEventListener('resize', resizeCanvas);
   overlay.init = true;
 };
 
 
-export const show = options => {
+export const showOverlay = options => {
   if (overlay.init) {
 
     if (!options.position) {
@@ -98,10 +98,10 @@ export const show = options => {
     overlay.c.style.display = 'block';
     overlay.lastStartingPoint = options.position;
 
-    options.targetRadius = overlay.calcPageFillRadius(options.position.x, options.position.y);
+    options.targetRadius = calcPageFillRadius(options.position.x, options.position.y);
     options.startRadius = 0;
     options.easing = 'easeOutQuart';
-    overlay.animateFill(options);
+    animateFill(options);
     overlay.open = true;
   }
 };
@@ -110,7 +110,7 @@ export const show = options => {
 // fill: color to animate with
 // position: position to target as the circle shrinks
 // complete: completion callback
-export const hide = opt => {
+export const hideOverlay = opt => {
   if (overlay.init) {
 
     let options = opt || {};
@@ -137,8 +137,8 @@ export const hide = opt => {
       if (callback) callback();
     };
 
-    options.startRadius = overlay.calcPageFillRadius(options.position.x, options.position.y);
-    overlay.animateFill(options);
+    options.startRadius = calcPageFillRadius(options.position.x, options.position.y);
+    animateFill(options);
     overlay.open = false;
   }
 };
@@ -167,16 +167,5 @@ export function clickPosition(e) {
   };
 }
 
-export const animateToggle = (event) => {
-  const position = clickPosition(event);
-
-  if (overlay.open) {
-    hide({ fill: overlay.currentColor, position });
-  } else {
-    overlay.currentColor = getRandomColor();
-    show({ fill: overlay.currentColor, position });
-  }
-  overlay.open = !overlay.open;
-};
 
 export const Overlay = overlay;
