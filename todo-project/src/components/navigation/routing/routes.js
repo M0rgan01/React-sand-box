@@ -12,6 +12,7 @@ export const ERROR_UNKNOWN = ERROR + '?type=' + UNKNOWN;
 
 export const TODOS = '/todos';
 export const WELCOME = '/welcome';
+export const GAME = '/game';
 
 export function useQuery() {
   return new URLSearchParams(useLocation().search);

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { AccountCircle, ExitToApp, Home, KeyboardBackspace, LockOpen } from '@material-ui/icons';
-import { TODOS, WELCOME } from './routing/routes';
+import { GAME, TODOS, WELCOME } from './routing/routes';
 import Box from '@material-ui/core/Box';
 import { useSelector } from 'react-redux';
 import {
@@ -59,6 +59,15 @@ export default function MainNavigation() {
                 <Button startIcon={<Home/>}
                         variant={'contained'}>
                   Home
+                </Button>
+              }>
+              </CustomLink>
+            </Box>
+            <Box display={'inline'} m={1}>
+              <CustomLink to={GAME} component={
+                <Button startIcon={<Home/>}
+                        variant={'contained'}>
+                  Matter.js example
                 </Button>
               }>
               </CustomLink>
