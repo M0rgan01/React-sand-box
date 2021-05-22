@@ -4,7 +4,7 @@ import List from '@material-ui/core/List';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { todosSelector } from '../store/selectors/todosSelectors';
 import { grey } from '@material-ui/core/colors';
 import Divider from '@material-ui/core/Divider';
@@ -13,12 +13,12 @@ import TextField from '@material-ui/core/TextField';
 import { useForm } from 'react-hook-form';
 import { LoadingButton } from './common/LoadingButton';
 import Box from '@material-ui/core/Box';
-import { deleteTodoAction, toggleTodoAction } from '../store/actions/todosActions';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import red from '@material-ui/core/colors/red';
 import { Service } from '../services/Service';
 import { TransitionPage } from './common/TransitionPage';
+import { v4 } from 'uuid';
 
 export default function Todo() {
 
@@ -27,32 +27,28 @@ export default function Todo() {
   const todos = useSelector(todosSelector) || [];
   const [transitionLoading, setTransitionLoading] = useState(true);
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    service.fetchTodos().then(() =>
-        setTimeout(() => {
-          setTransitionLoading(false);
-        }, 2000));
+    service.fetchTodos().then(() => setTransitionLoading(false));
   }, []);
 
-  const onCreate = async (data) => {
+  const onCreate = async (todo) => {
     setLoading(true);
-    await service.postTodos(data.title);
+    await service.saveTodos({ id: v4(), title: todo.title, complete: false });
     reset();
     setLoading(false);
   };
 
-  const onEdit = async (data) => {
+  const onEdit = async (todo) => {
     setLoading(true);
-    dispatch(toggleTodoAction(data));
+    await service.saveTodos(todo);
     reset();
     setLoading(false);
   };
 
   const onDelete = async (id) => {
     setLoading(true);
-    dispatch(deleteTodoAction(id));
+    await service.deleteTodos(id);
     setLoading(false);
   };
 
@@ -66,8 +62,9 @@ export default function Todo() {
               <ListItemIcon>
                 <Checkbox
                     edge="start"
-                    onClick={ () => onEdit(todo) }
+                    onClick={ () => onEdit({...todo, complete: !todo.complete}) }
                     checked={ todo.complete }
+                    name="complete"
                     tabIndex={ -1 }
                     disableRipple
                 />

@@ -1,9 +1,4 @@
-import { ADD_TODO_ACTION, DELETE_TODO_ACTION, SET_TODOS_ACTION, UPDATE_TODO_ACTION } from '../reducer/todoReducer';
-
-export const toggleTodoAction = (todo) => ({
-  type: UPDATE_TODO_ACTION,
-  payload: {...todo, complete: !todo.complete},
-});
+import { DELETE_TODO_ACTION, SAVE_TODO_ACTION, SET_TODOS_ACTION } from '../reducer/todoReducer';
 
 export const deleteTodoAction = (id) => ({
   type: DELETE_TODO_ACTION,
@@ -16,8 +11,8 @@ export const setTodosAction = (todos) => ({
 });
 
 // without async call
-export const addTodoAction = (todo) => ({
-  type: ADD_TODO_ACTION,
+export const saveTodoAction = (todo) => ({
+  type: SAVE_TODO_ACTION,
   payload: todo,
 });
 
@@ -26,7 +21,7 @@ export const addAsyncTodoAction = (title) =>
    async (dispatch) => {
    await wait(2000);
    dispatch({
-     type: ADD_TODO_ACTION,
+     type: SAVE_TODO_ACTION,
      payload: title,
    });
 };
