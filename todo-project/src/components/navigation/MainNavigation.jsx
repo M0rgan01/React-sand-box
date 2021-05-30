@@ -14,6 +14,7 @@ import { lightGreen, red } from '@material-ui/core/colors';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import { Slide } from '@material-ui/core';
 import { CustomLink } from './routing/CustomLink';
+import CompleteMenu from './CompleteMenu';
 
 function resizeHeader() {
   const header = document.getElementById('header');
@@ -64,13 +65,7 @@ export default function MainNavigation() {
               </CustomLink>
             </Box>
             <Box display={'inline'} m={1}>
-              <CustomLink to={GAME} component={
-                <Button startIcon={<Home/>}
-                        variant={'contained'}>
-                  Matter.js example
-                </Button>
-              }>
-              </CustomLink>
+              <CompleteMenu />
             </Box>
             <Box display={'inline'} m={1}>
               <CustomLink to={TODOS} component={

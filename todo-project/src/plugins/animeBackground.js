@@ -4,7 +4,7 @@ import anime from 'animejs';
 // https://codepen.io/alexzaworski/pen/mEkvAG
 
 export const minCoverDuration = 750;
-let colors = ['green', 'blue', 'red'];
+let colors = ['#42464d', '#787878', '#d15f02', '#003c80', '#00802b', '#9c0031'];
 let overlay = {};
 overlay.circle = {};
 overlay.open = true;
