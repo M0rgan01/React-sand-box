@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.grid > div {
+    background: #ccc;
+    border: solid 1px #999;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+}
+
+.child {
+    grid-column-start: 5;
+    grid-row-start: 2;
+}
