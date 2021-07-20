@@ -1,12 +1,13 @@
 import { Redirect, Switch } from 'react-router-dom';
 import React from 'react';
-import { ERROR, GAME, TODOS, WELCOME } from './routes';
+import { CHECKERS_GAME, ERROR, MATTER_GAME, TODOS, WELCOME } from './routes';
 import Error from '../Error';
 import Todo from '../../Todo';
 import Welcome from '../../Welcome';
 import { CustomRoute } from './CustomRoute';
 import { PrivateRoute } from './PrivateRoute';
-import Game from '../../Game';
+import MatterGame from '../../games/MatterGame';
+import CheckersGame from '../../games/CheckersGame';
 
 export function AppRoutes() {
 
@@ -22,7 +23,9 @@ export function AppRoutes() {
 
     <PrivateRoute component={ Todo } path={ TODOS }/>
 
-    <PrivateRoute component={ Game } path={ GAME }/>
+    <PrivateRoute component={ MatterGame } path={ MATTER_GAME }/>
+
+    <PrivateRoute component={ CheckersGame } path={ CHECKERS_GAME }/>
 
     <CustomRoute path='*' component={ Error }/>
 

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { AccountCircle, ExitToApp, Home, KeyboardBackspace, LockOpen } from '@material-ui/icons';
-import { GAME, TODOS, WELCOME } from './routing/routes';
+import { TODOS, WELCOME } from './routing/routes';
 import Box from '@material-ui/core/Box';
 import { useSelector } from 'react-redux';
 import {
@@ -14,7 +14,7 @@ import { lightGreen, red } from '@material-ui/core/colors';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import { Slide } from '@material-ui/core';
 import { CustomLink } from './routing/CustomLink';
-import CompleteMenu from './CompleteMenu';
+import GameMenu from './GameMenu';
 
 function resizeHeader() {
   const header = document.getElementById('header');
@@ -65,7 +65,7 @@ export default function MainNavigation() {
               </CustomLink>
             </Box>
             <Box display={'inline'} m={1}>
-              <CompleteMenu />
+              <GameMenu />
             </Box>
             <Box display={'inline'} m={1}>
               <CustomLink to={TODOS} component={

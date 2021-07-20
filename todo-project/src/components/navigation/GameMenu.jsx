@@ -3,11 +3,11 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { CustomLink } from './routing/CustomLink';
-import { GAME } from './routing/routes';
+import { CHECKERS_GAME, MATTER_GAME } from './routing/routes';
 import { KeyboardBackspace } from '@material-ui/icons';
 import { amber } from '@material-ui/core/colors';
 
-export default function CompleteMenu() {
+export default function GameMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -24,7 +24,7 @@ export default function CompleteMenu() {
                 variant={'contained'}
                 style={{ background: amber[700], color: 'white' }}
                 onClick={handleClick}>
-          Complete
+          Games
         </Button>
         <Menu
             id="complete-menu"
@@ -41,8 +41,12 @@ export default function CompleteMenu() {
               horizontal: 'center',
             }}
         >
-          <CustomLink to={GAME} component={
+          <CustomLink to={MATTER_GAME} component={
             <MenuItem onClick={handleClose}>Matter.js</MenuItem>
+          }>
+          </CustomLink>
+          <CustomLink to={CHECKERS_GAME} component={
+            <MenuItem onClick={handleClose}>Checkers</MenuItem>
           }>
           </CustomLink>
         </Menu>

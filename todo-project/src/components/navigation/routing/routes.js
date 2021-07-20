@@ -12,7 +12,8 @@ export const ERROR_UNKNOWN = ERROR + '?type=' + UNKNOWN;
 
 export const TODOS = '/todos';
 export const WELCOME = '/welcome';
-export const GAME = '/game';
+export const MATTER_GAME = '/matter-game';
+export const CHECKERS_GAME = '/checkers-game';
 
 export function useQuery() {
   return new URLSearchParams(useLocation().search);

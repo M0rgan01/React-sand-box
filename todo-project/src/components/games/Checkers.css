@@ -1,0 +1,46 @@
+.board {
+    width: 480px;
+    height: 480px;
+    background: #000;
+    transform: rotate(-30deg) skew(25deg);
+}
+
+.board span{
+    width: 480px;
+    height: 60px;
+    display: block;
+}
+
+.board span:nth-child(odd){
+    background: linear-gradient(90deg, #f1f1f1 0%, #f1f1f1 50%, #333 50%, #333 100%);
+    background-size: 120px;
+}
+
+.board span:nth-child(even){
+    background: linear-gradient(90deg, #333 0%, #333 50%, #f1f1f1 50%, #f1f1f1 100%);
+    background-size: 120px;
+}
+
+.board:before {
+    content: '';
+    position: absolute;
+    right: 250px;
+    height: 20px;
+    width: 100%;
+    background: linear-gradient(90deg, #fff 0%, #fff 50%, #000 50%, #000 100%);
+    background-size: 120px;
+    transform: rotate(90deg) skew(45deg);
+    top: 240px;
+}
+
+.board:after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -10px;
+    height: 20px;
+    width: 100%;
+    background: linear-gradient(90deg, #000 0%, #000 50%, #fff 50%, #fff 100%);
+    background-size: 120px;
+    transform: rotate(0deg) skewX(-45deg);
+}
