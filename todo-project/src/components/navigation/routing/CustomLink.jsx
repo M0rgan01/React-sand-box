@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { clickPosition, showOverlay } from '../../../plugins/animeBackground';
 import { useHistory } from 'react-router-dom';
 
-export function CustomLink({ to, component }) {
+const link = (({ to, component }, ref) => {
 
   let history = useHistory();
 
@@ -13,7 +13,10 @@ export function CustomLink({ to, component }) {
   };
 
   return <span onClick={ event => fillBackground(event) }>{ component }</span>;
-}
+});
+
+// https://fr.reactjs.org/docs/forwarding-refs.html
+export const CustomLink = forwardRef(link);
 
 CustomLink.propTypes = {
   to: PropTypes.string.isRequired,
