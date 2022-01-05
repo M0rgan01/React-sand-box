@@ -2,7 +2,7 @@ import { Redirect, Switch } from 'react-router-dom';
 import React from 'react';
 import { CHECKERS_GAME, ERROR, MATTER_GAME, TODOS, WELCOME } from './routes';
 import Error from '../Error';
-import Todo from '../../Todo';
+import Todo from '../../technos/Todo';
 import Welcome from '../../Welcome';
 import { CustomRoute } from './CustomRoute';
 import { PrivateRoute } from './PrivateRoute';

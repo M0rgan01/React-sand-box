@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import { AccountCircle, ExitToApp, Home, KeyboardBackspace, LockOpen } from '@material-ui/icons';
-import { TODOS, WELCOME } from './routing/routes';
+import { AccountCircle, ExitToApp, Home, LockOpen } from '@material-ui/icons';
+import { WELCOME } from './routing/routes';
 import Box from '@material-ui/core/Box';
 import { useSelector } from 'react-redux';
 import {
@@ -11,10 +11,10 @@ import {
   profileUrlSelector,
 } from '../../store/selectors/authSelectors';
 import { lightGreen, red } from '@material-ui/core/colors';
-import lightBlue from '@material-ui/core/colors/lightBlue';
 import { Slide } from '@material-ui/core';
 import { CustomLink } from './routing/CustomLink';
-import GameMenu from './GameMenu';
+import GamesMenu from './GamesMenu';
+import TechnosMenu from './TechnosMenu';
 
 function resizeHeader() {
   const header = document.getElementById('header');
@@ -65,17 +65,10 @@ export default function MainNavigation() {
               </CustomLink>
             </Box>
             <Box display={'inline'} m={1}>
-              <GameMenu />
+              <GamesMenu />
             </Box>
             <Box display={'inline'} m={1}>
-              <CustomLink to={TODOS} component={
-                <Button startIcon={<KeyboardBackspace/>}
-                        variant={'contained'}
-                        style={{ background: lightBlue[700], color: 'white' }}>
-                  Todos
-                </Button>
-              }>
-              </CustomLink>
+              <TechnosMenu />
             </Box>
             <Box display={'inline'} m={1}>
               <Button startIcon={<AccountCircle/>}

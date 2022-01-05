@@ -5,19 +5,19 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useSelector } from 'react-redux';
-import { todosSelector } from '../store/selectors/todosSelectors';
+import { todosSelector } from '../../store/selectors/todosSelectors';
 import { grey } from '@material-ui/core/colors';
 import Divider from '@material-ui/core/Divider';
 import { Add, Delete } from '@material-ui/icons';
 import TextField from '@material-ui/core/TextField';
 import { useForm } from 'react-hook-form';
-import { LoadingButton } from './common/LoadingButton';
+import { LoadingButton } from '../common/LoadingButton';
 import Box from '@material-ui/core/Box';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import red from '@material-ui/core/colors/red';
-import { Service } from '../services/Service';
-import { TransitionPage } from './common/TransitionPage';
+import { Service } from '../../services/Service';
+import { TransitionPage } from '../common/TransitionPage';
 import { v4 } from 'uuid';
 
 export default function Todo() {

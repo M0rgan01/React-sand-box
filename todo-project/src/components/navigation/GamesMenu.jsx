@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import { MuiMenu } from './Menu';
+import { CustomMenu } from './CustomMenu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { CustomLink } from './routing/CustomLink';
 import { CHECKERS_GAME, MATTER_GAME } from './routing/routes';
 import { KeyboardBackspace } from '@material-ui/icons';
 import { amber } from '@material-ui/core/colors';
 
-export default function GameMenu() {
+export default function GamesMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -26,21 +26,11 @@ export default function GameMenu() {
                 onClick={handleClick}>
           Games
         </Button>
-        <MuiMenu
-            id="complete-menu"
+        <CustomMenu
+            id="games-menu"
             anchorEl={anchorEl}
-            getContentAnchorEl={null}
-            keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
-            }}
         >
           <CustomLink to={MATTER_GAME} component={
             <MenuItem onClick={handleClose}>Matter.js</MenuItem>
@@ -50,7 +40,7 @@ export default function GameMenu() {
             <MenuItem onClick={handleClose}>Checkers</MenuItem>
           }>
           </CustomLink>
-        </MuiMenu>
+        </CustomMenu>
       </div>
   );
 }
