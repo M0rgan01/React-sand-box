@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import { CustomMenu } from './CustomMenu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { CustomLink } from './routing/CustomLink';
-import { TODOS } from './routing/routes';
+import { REACT_QUERY, TODOS } from './routing/routes';
 import { KeyboardBackspace } from '@material-ui/icons';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 
@@ -34,8 +34,10 @@ export default function TechnosMenu() {
       >
         <CustomLink to={TODOS} component={
           <MenuItem onClick={handleClose}>Todos API</MenuItem>
-        }>
-        </CustomLink>
+        }/>
+        <CustomLink to={REACT_QUERY} component={
+          <MenuItem onClick={handleClose}>React query</MenuItem>
+        }/>
       </CustomMenu>
     </div>
   );

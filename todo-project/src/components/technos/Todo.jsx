@@ -16,13 +16,13 @@ import Box from '@material-ui/core/Box';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import red from '@material-ui/core/colors/red';
-import { Service } from '../../services/Service';
+import { TodoService } from '../../services/TodoService';
 import { TransitionPage } from '../common/TransitionPage';
 import { v4 } from 'uuid';
 
 export default function Todo() {
 
-  const service = new Service();
+  const service = new TodoService();
   const { register, handleSubmit, formState, reset } = useForm({ mode: 'onChange' });
   const todos = useSelector(todosSelector) || [];
   const [transitionLoading, setTransitionLoading] = useState(true);

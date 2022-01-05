@@ -11,6 +11,7 @@ export const ERROR_NOT_FOUND = ERROR + '?type=' + NOT_FOUND;
 export const ERROR_UNKNOWN = ERROR + '?type=' + UNKNOWN;
 
 export const TODOS = '/todos';
+export const REACT_QUERY = '/react-query';
 export const WELCOME = '/welcome';
 export const MATTER_GAME = '/matter-game';
 export const CHECKERS_GAME = '/checkers-game';

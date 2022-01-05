@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { Service } from '../services/Service';
+import { TodoService } from '../services/Service';
 
-const service = new Service();
+const service = new TodoService();
 
 describe('Test mock', () => {
 

@@ -6,16 +6,21 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store';
 import './app.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryCLient = new QueryClient();
 
 ReactDOM.render(
   <div>
     <canvas id="backgroundAnimate"/>
     <Provider store={store}>
-      <ErrorCatching>
-        <div id="app">
-          <App/>
-        </div>
-      </ErrorCatching>
+      <QueryClientProvider client={queryCLient}>
+        <ErrorCatching>
+          <div id="app">
+            <App/>
+          </div>
+        </ErrorCatching>
+      </QueryClientProvider>
     </Provider>
   </div>,
   document.getElementById('root'),
