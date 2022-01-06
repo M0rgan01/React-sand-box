@@ -4,14 +4,14 @@ import { Fade } from '@material-ui/core';
 import { hideOverlay, minCoverDuration, Overlay } from '../../plugins/animeBackground';
 import CentralLoading from './CentralLoading';
 
-export function TransitionPage({children, loading}) {
+export function TransitionPage({children, loading, disable}) {
   const [delayTimeout, setDelayTimeout] = useState(false);
 
   useEffect(() => {
-    if (!loading && Overlay.open) {
+    if (!loading && Overlay.open && !disable) {
       hideOverlay();
     }
-  }, [loading, Overlay.open]);
+  }, [loading, Overlay.open, disable]);
 
   if (!loading) {
     setTimeout(() => {
@@ -32,5 +32,6 @@ export function TransitionPage({children, loading}) {
 
 TransitionPage.propTypes = {
   loading: PropTypes.bool,
+  disable: PropTypes.bool,
   children: PropTypes.node,
 };
