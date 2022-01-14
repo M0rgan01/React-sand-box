@@ -91,7 +91,7 @@ export default function MainNavigation() {
           <Box display={'inline'} m={1}>
             <Button startIcon={<LockOpen/>}
                     onClick={onLogin}
-                    style={{ background: lightGreen[700], color: 'white' }}
+                    color={'primary'}
                     variant={'contained'}>
               Login
             </Button>

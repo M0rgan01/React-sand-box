@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import store from './store';
 import './app.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { MuiThemeProvider } from '@material-ui/core';
+import muiTheme from './plugins/material-ui';
 
 const queryCLient = new QueryClient();
 
@@ -14,13 +16,15 @@ ReactDOM.render(
   <div>
     <canvas id="backgroundAnimate"/>
     <Provider store={store}>
-      <QueryClientProvider client={queryCLient}>
-        <ErrorCatching>
-          <div id="app">
-            <App/>
-          </div>
-        </ErrorCatching>
-      </QueryClientProvider>
+      <MuiThemeProvider theme={muiTheme}>
+        <QueryClientProvider client={queryCLient}>
+          <ErrorCatching>
+            <div id="app">
+              <App/>
+            </div>
+          </ErrorCatching>
+        </QueryClientProvider>
+      </MuiThemeProvider>
     </Provider>
   </div>,
   document.getElementById('root'),
