@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { isAuthenticatedSelector, realmSelector, tokenSelector } from '../store/selectors/authSelectors';
-import { BACKEND_URL } from './urls';
 import store from '../store/index';
 import history from './history';
 import {
@@ -10,7 +9,7 @@ import {
   ERROR_UNKNOWN,
 } from '../components/navigation/routing/routes';
 
-const axiosInstance = axios.create({ baseURL: BACKEND_URL });
+const axiosInstance = axios.create({ baseURL:  process.env.REACT_APP_API_URL });
 
 axiosInstance.interceptors.request.use(function (request) {
   const storeState = store.getState();

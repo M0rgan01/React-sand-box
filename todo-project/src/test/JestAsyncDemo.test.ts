@@ -1,7 +1,6 @@
+import { sleep } from './Timer';
 
-import {sleep} from './Timer';
-
-jest.setTimeout('10000');
+jest.setTimeout(10000);
 
 describe('Timer', () => {
 
@@ -35,4 +34,4 @@ describe('Timer with concurrence', () => {
     expect(Date.now() - t).toBeGreaterThanOrEqual(2000);
   });
 
-})
+});
