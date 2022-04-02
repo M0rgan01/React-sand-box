@@ -10,14 +10,14 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { MuiThemeProvider } from '@material-ui/core';
 import muiTheme from './plugins/material-ui';
 
-const queryCLient = new QueryClient();
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <div>
     <canvas id="backgroundAnimate"/>
     <Provider store={store}>
       <MuiThemeProvider theme={muiTheme}>
-        <QueryClientProvider client={queryCLient}>
+        <QueryClientProvider client={queryClient}>
           <ErrorCatching>
             <div id="app">
               <App/>
