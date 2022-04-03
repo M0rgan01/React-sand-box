@@ -1,7 +1,5 @@
-
 // ensemble de tests
 describe('Pack démo', () => {
-
   beforeEach(() => {
     console.log('Before Each test');
   });

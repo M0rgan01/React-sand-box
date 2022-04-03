@@ -1,26 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { MuiThemeProvider } from '@material-ui/core';
 import App from './App';
 import ErrorCatching from './components/ErrorCatching';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
 import store from './store';
 import './app.css';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { MuiThemeProvider } from '@material-ui/core';
 import muiTheme from './plugins/material-ui';
 
 const queryClient = new QueryClient();
 
 ReactDOM.render(
   <div>
-    <canvas id="backgroundAnimate"/>
+    <canvas id="backgroundAnimate" />
     <Provider store={store}>
       <MuiThemeProvider theme={muiTheme}>
         <QueryClientProvider client={queryClient}>
           <ErrorCatching>
             <div id="app">
-              <App/>
+              <App />
             </div>
           </ErrorCatching>
         </QueryClientProvider>

@@ -9,9 +9,9 @@ import {
   ERROR_UNKNOWN,
 } from '../components/navigation/routing/routes';
 
-const axiosInstance = axios.create({ baseURL:  process.env.REACT_APP_API_URL });
+const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
-axiosInstance.interceptors.request.use(function (request) {
+axiosInstance.interceptors.request.use((request) => {
   const storeState = store.getState();
   if (isAuthenticatedSelector(storeState)) {
     request.headers.common = {
@@ -20,16 +20,14 @@ axiosInstance.interceptors.request.use(function (request) {
     };
   }
   return request;
-}, function (error) {
-  return Promise.reject(error);
-});
+}, (error) => Promise.reject(error));
 
-axiosInstance.interceptors.response.use(undefined, function (error) {
-  const response = error.response;
+axiosInstance.interceptors.response.use(undefined, (error) => {
+  const { response } = error;
   if (!response) {
     history.push(ERROR_UNKNOWN);
   } else {
-    const status = response.status;
+    const { status } = response;
 
     switch (status) {
       case 409:
@@ -43,10 +41,10 @@ axiosInstance.interceptors.response.use(undefined, function (error) {
       case 403:
         history.push(ERROR_FORBIDDEN);
         break;
-      default:
       case 500:
       case 503:
       case 400:
+      default:
         history.push(ERROR_UNKNOWN);
     }
   }

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Fade } from '@material-ui/core';
 import { hideOverlay, minCoverDuration, Overlay } from '../../plugins/animeBackground';
 import CentralLoading from './CentralLoading';
 
-export function TransitionPage({children, loading, disable}) {
+interface TransitionPageProps {
+  loading?: boolean;
+  disable?: boolean;
+  children: React.ReactNode;
+}
+
+export function TransitionPage({ children, loading, disable }: TransitionPageProps) {
   const [delayTimeout, setDelayTimeout] = useState(false);
 
   useEffect(() => {
@@ -20,18 +25,15 @@ export function TransitionPage({children, loading, disable}) {
   }
 
   if (loading) {
-    return <CentralLoading/>;
-  } else {
-   return <Fade in={ delayTimeout }>
-     <div>
-       { children }
-     </div>
-    </Fade>;
+    return <CentralLoading />;
   }
+  return (
+    <Fade in={delayTimeout}>
+      <div>
+        { children }
+      </div>
+    </Fade>
+  );
 }
 
-TransitionPage.propTypes = {
-  loading: PropTypes.bool,
-  disable: PropTypes.bool,
-  children: PropTypes.node,
-};
+export default TransitionPage;

@@ -2,14 +2,15 @@ export const KEYCLOAK = 'KEYCLOAK';
 export const USER_PROFILE = 'USER_PROFILE';
 export const UPDATE_TOKEN = 'UPDATE_TOKEN';
 
+// eslint-disable-next-line
 export function AuthReducer(state = null, action) {
   switch (action.type) {
     case UPDATE_TOKEN:
-      return {...state, keycloakInstance: {...state.keycloakInstance, token: action.payload}};
+      return { ...state, keycloakInstance: { ...state.keycloakInstance, token: action.payload } };
     case KEYCLOAK:
-      return {...state, keycloakInstance: action.payload};
+      return { ...state, keycloakInstance: action.payload };
     case USER_PROFILE:
-      return {...state, userProfile: action.payload};
+      return { ...state, userProfile: action.payload };
     default:
       return state;
   }
