@@ -1,12 +1,12 @@
-import { Engine, Render, World, Bodies, Runner, MouseConstraint, Mouse, Composite } from 'matter-js';
+import {
+  Engine, Render, World, Bodies, Runner, MouseConstraint, Mouse, Composite,
+} from 'matter-js';
 
-let matterGame = {};
+const matterGame = {};
 matterGame.init = false;
 
 export function initGame() {
-
   if (!matterGame.init) {
-
     matterGame.init = true;
     matterGame.mouse = Mouse;
     matterGame.composite = Composite;
@@ -24,16 +24,16 @@ export function initGame() {
     });
 
     // add mouse control
-    const mouse = matterGame.mouse.create(matterGame.render.canvas),
-        mouseConstraint = matterGame.mouseConstraint.create(matterGame.engine, {
-          mouse: mouse,
-          constraint: {
-            stiffness: 0.2,
-            render: {
-              visible: false,
-            },
-          },
-        });
+    const mouse = matterGame.mouse.create(matterGame.render.canvas);
+    const mouseConstraint = matterGame.mouseConstraint.create(matterGame.engine, {
+      mouse,
+      constraint: {
+        stiffness: 0.2,
+        render: {
+          visible: false,
+        },
+      },
+    });
 
     // keep the mouse in sync with rendering
     matterGame.render.mouse = mouse;
@@ -54,7 +54,6 @@ export function initGame() {
   matterGame.composite.add(matterGame.world, [boxA, ballA, ballB, ground]);
 
   World.add(matterGame.engine.world, [boxA, ballA, ballB, ground]);
-
 }
 
 export function gameClose() {

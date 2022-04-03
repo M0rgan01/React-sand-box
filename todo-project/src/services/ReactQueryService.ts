@@ -1,19 +1,19 @@
 import axiosInstance from '../plugins/axios';
-import {TODOS} from '../plugins/urls';
-import {Todo} from './model';
+import { TODOS } from '../plugins/urls';
+import { Todo } from './model';
 
-export class ReactQueryService {
-
-  async fetchTodos() {
-    return await axiosInstance.get(TODOS);
+class ReactQueryService {
+  static fetchTodos() {
+    return axiosInstance.get<Todo[]>(TODOS);
   }
 
-  async saveTodos(todo: Todo) {
-    return await axiosInstance.post(TODOS, todo);
+  static saveTodos(todo: Todo) {
+    return axiosInstance.post<Todo>(TODOS, todo);
   }
 
-  async deleteTodos(id: string) {
-    return await axiosInstance.delete(TODOS + '/' + id);
+  static deleteTodos(id: string) {
+    return axiosInstance.delete(`${TODOS}/${id}`);
   }
-
 }
+
+export default ReactQueryService;

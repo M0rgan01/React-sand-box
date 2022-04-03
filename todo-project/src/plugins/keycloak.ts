@@ -15,18 +15,15 @@ store.dispatch(setKeycloakInstanceAction(keycloak));
 function initRefreshTokenInterval() {
   const refreshInterval = setInterval(() => {
     keycloak.updateToken(70).then((refreshed) => {
-
       if (process.env.NODE_ENV === 'development') {
         if (refreshed) {
-
           store.dispatch(UpdateTokenAction(keycloak.token));
 
-          console.info('Token refreshed ' + refreshed);
+          console.info(`Token refreshed ${refreshed}`);
         } else {
-          console.warn('Token not refreshed, valid for ' + Math.round(keycloak.tokenParsed!.exp! + keycloak.timeSkew! - new Date().getTime() / 1000) + ' seconds');
+          console.warn(`Token not refreshed, valid for ${Math.round(keycloak.tokenParsed!.exp! + keycloak.timeSkew! - new Date().getTime() / 1000)} seconds`);
         }
       }
-
     }).catch(() => {
       console.error('Failed to refresh token');
       clearInterval(refreshInterval);
@@ -35,19 +32,19 @@ function initRefreshTokenInterval() {
 }
 
 export default function initKeycloak() {
-  return new Promise<boolean>((isAuth, reject) => {
-
-    const silentCheckSsoRedirectUri = process.env.REACT_APP_KEYCLOAK_REDIRECT_URL + '/' + process.env.REACT_APP_KEYCLOAK_SILENT_SSO_FILE_NAME;
-
-    keycloak.init({ onLoad: 'check-sso', silentCheckSsoRedirectUri }).then(async (auth) => {
-
+  return new Promise<void>((resolve, reject) => {
+    const silentCheckSsoRedirectUri = `${process.env.REACT_APP_KEYCLOAK_REDIRECT_URL}/${process.env.REACT_APP_KEYCLOAK_SILENT_SSO_FILE_NAME}`;
+    keycloak.init({ onLoad: 'check-sso', silentCheckSsoRedirectUri }).then((auth) => {
       if (auth) {
         store.dispatch(setKeycloakInstanceAction(keycloak));
-        const keycloakProfile = await keycloak.loadUserProfile();
-        store.dispatch(setUserProfileAction(keycloakProfile));
-        initRefreshTokenInterval();
+        keycloak.loadUserProfile().then((keycloakProfile) => {
+          store.dispatch(setUserProfileAction(keycloakProfile));
+          initRefreshTokenInterval();
+        });
+        resolve();
+      } else {
+        resolve();
       }
-      isAuth(auth);
     }).catch(() => {
       console.error('Authenticated Failed');
       reject();

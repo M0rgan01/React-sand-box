@@ -2,24 +2,26 @@ export const SET_TODOS_ACTION = 'SET_TODOS_ACTION';
 export const SAVE_TODO_ACTION = 'SAVE_TODO_ACTION';
 export const DELETE_TODO_ACTION = 'DELETE_TODO_ACTION';
 
-export function TodoReducer (state = null, action) {
-  switch (action.type) {
+// eslint-disable-next-line
+export function TodoReducer(state = null, action) {
+  const { type, payload } = action;
+
+  switch (type) {
     case SET_TODOS_ACTION:
-      return action.payload ? action.payload : null;
+      return payload || null;
     case SAVE_TODO_ACTION:
-      if (state.map(value => value.id).includes(action.payload.id)) {
-        return state.map(value => {
-          if (value.id === action.payload.id) {
-            return {...value, ...action.payload};
-          } else {
-            return value;
+      if (state.map((value) => value.id).includes(payload.id)) {
+        return state.map((value) => {
+          if (value.id === payload.id) {
+            return { ...value, ...payload };
           }
+          return value;
         });
-      } else {
-        return [...state, action.payload];
       }
+      return [...state, payload];
+
     case DELETE_TODO_ACTION:
-      return state.filter(value => value.id !== action.payload);
+      return state.filter((value) => value.id !== payload);
     default:
       return state;
   }

@@ -5,8 +5,7 @@ import store from '../store';
 import { deleteTodoAction, saveTodoAction, setTodosAction } from '../store/actions/todosActions';
 import { Todo } from './model';
 
-export class TodoService extends SafeService {
-
+class TodoService extends SafeService {
   async fetchTodos(callBack?: () => void): Promise<void> {
     await this.safeCall(async () => {
       const todos = (await axiosInstance.get(TODOS)).data;
@@ -23,9 +22,10 @@ export class TodoService extends SafeService {
 
   async deleteTodos(id: string, callBack?: () => void): Promise<void> {
     await this.safeCall(async () => {
-      await axiosInstance.delete(TODOS + '/' + id);
+      await axiosInstance.delete(`${TODOS}/${id}`);
       store.dispatch(deleteTodoAction(id));
     }, callBack);
   }
-
 }
+
+export default TodoService;

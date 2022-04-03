@@ -15,13 +15,3 @@ export const saveTodoAction = (todo) => ({
   type: SAVE_TODO_ACTION,
   payload: todo,
 });
-
-// with async call (redux-thunk)
-export const addAsyncTodoAction = (title) =>
-   async (dispatch) => {
-   await wait(2000);
-   dispatch({
-     type: SAVE_TODO_ACTION,
-     payload: title,
-   });
-};

@@ -2,11 +2,13 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { KeyboardBackspace, LiveHelp } from '@material-ui/icons';
 import { ComponentTitle } from '../common/ComponentTitle';
-import { FORBIDDEN, NOT_FOUND, UNAUTHORIZED, UNKNOWN, useQuery, WELCOME } from './routing/routes';
-import { CustomLink } from './routing/CustomLink';
+import {
+  FORBIDDEN, NOT_FOUND, UNAUTHORIZED, UNKNOWN, useQuery, WELCOME,
+} from './routing/routes';
+import CustomLink from './routing/CustomLink';
 import { TransitionPage } from '../common/TransitionPage';
 
-function defineTitle(type) {
+function defineTitle(type: string) {
   switch (type) {
     case FORBIDDEN:
       return '403 Forbidden';
@@ -25,11 +27,17 @@ export default function Error() {
   const type = useQuery().get('type');
   const title = type ? defineTitle(type) : '404 Not found';
 
-  return <TransitionPage>
-    <ComponentTitle title={ title } icon={ <LiveHelp fontSize={ 'large' }/> }/>
-    <CustomLink to={ WELCOME }
-                component={ <Button startIcon={ <KeyboardBackspace/> }>
-                  back to home
-                </Button> }/>
-  </TransitionPage>;
+  return (
+    <TransitionPage>
+      <ComponentTitle title={title} icon={<LiveHelp fontSize="large" />} />
+      <CustomLink
+        to={WELCOME}
+        component={(
+          <Button startIcon={<KeyboardBackspace />}>
+            back to home
+          </Button>
+)}
+      />
+    </TransitionPage>
+  );
 }

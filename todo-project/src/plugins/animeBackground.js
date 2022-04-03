@@ -4,8 +4,8 @@ import anime from 'animejs';
 // https://codepen.io/alexzaworski/pen/mEkvAG
 
 export const minCoverDuration = 750;
-let colors = ['#42464d', '#787878', '#d15f02', '#003c80', '#00802b', '#9c0031'];
-let overlay = {};
+const colors = ['#42464d', '#787878', '#d15f02', '#003c80', '#00802b', '#9c0031'];
+const overlay = {};
 overlay.circle = {};
 overlay.open = true;
 overlay.init = false;
@@ -17,7 +17,7 @@ function getRandomColor() {
 function calcPageFillRadius(x, y) {
   const l = Math.max(x - 0, overlay.cW - x);
   const h = Math.max(y - 0, overlay.cH - y);
-  return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
+  return Math.sqrt(l ** 2 + h ** 2);
 }
 
 function resizeCanvas() {
@@ -43,7 +43,6 @@ overlay.circle.draw = function (options) {
 };
 
 function animateFill(options) {
-
   overlay.bgColor = options.fill;
 
   overlay.circle.x = options.position.x;
@@ -77,10 +76,9 @@ export const onAppInit = () => {
   overlay.init = true;
 };
 
-
-export const showOverlay = options => {
+export const showOverlay = (opt) => {
+  const options = opt;
   if (overlay.init) {
-
     if (!options.position) {
       if (overlay.x && overlay.y) {
         options.position = { x: overlay.x, y: overlay.y };
@@ -110,10 +108,9 @@ export const showOverlay = options => {
 // fill: color to animate with
 // position: position to target as the circle shrinks
 // complete: completion callback
-export const hideOverlay = opt => {
+export const hideOverlay = (opt) => {
   if (overlay.init) {
-
-    let options = opt || {};
+    const options = opt || {};
 
     options.targetRadius = 0;
     options.easing = 'easeInOutQuart';
@@ -146,6 +143,7 @@ export const hideOverlay = opt => {
 export function clickPosition(e) {
   let event = e;
   if (event.touches) {
+    // eslint-disable-next-line
     event = event.touches[0];
   }
 
