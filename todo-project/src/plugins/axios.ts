@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { isAuthenticatedSelector, realmSelector, tokenSelector } from '../store/selectors/authSelectors';
-import store from '../store/index';
+import { store } from '../store';
 import history from './history';
 import {
   ERROR_FORBIDDEN,
