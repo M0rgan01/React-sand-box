@@ -9,24 +9,28 @@ import reportWebVitals from './reportWebVitals';
 import store from './store';
 import './app.css';
 import muiTheme from './plugins/material-ui';
+import CustomRouter from './components/navigation/routing/CustomRouter';
+import history from './plugins/history';
 
 const queryClient = new QueryClient();
 
 ReactDOM.render(
-  <div>
-    <canvas id="backgroundAnimate" />
-    <Provider store={store}>
-      <MuiThemeProvider theme={muiTheme}>
-        <QueryClientProvider client={queryClient}>
-          <ErrorCatching>
-            <div id="app">
-              <App />
-            </div>
-          </ErrorCatching>
-        </QueryClientProvider>
-      </MuiThemeProvider>
-    </Provider>
-  </div>,
+  <CustomRouter history={history}>
+    <>
+      <canvas id="backgroundAnimate" />
+      <Provider store={store}>
+        <MuiThemeProvider theme={muiTheme}>
+          <QueryClientProvider client={queryClient}>
+            <ErrorCatching>
+              <div id="app">
+                <App />
+              </div>
+            </ErrorCatching>
+          </QueryClientProvider>
+        </MuiThemeProvider>
+      </Provider>
+    </>
+  </CustomRouter>,
   document.getElementById('root'),
 );
 

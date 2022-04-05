@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box';
 import { useSelector } from 'react-redux';
 import { lightGreen, red } from '@material-ui/core/colors';
 import { Slide } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 import {
   isAuthenticatedSelector,
   loginSelector,
@@ -26,6 +27,7 @@ function resizeHeader() {
 }
 
 export default function MainNavigation() {
+  const navigate = useNavigate();
   const login = useSelector(loginSelector);
   const logout = useSelector(logoutSelector);
   const profileUrl = useSelector(profileUrlSelector);
@@ -64,12 +66,13 @@ profileUrl!,
                     to={WELCOME}
                     component={(
                       <Button
+                        onClick={() => navigate(WELCOME)}
                         startIcon={<Home />}
                         variant="contained"
                       >
                         Home
                       </Button>
-              )}
+                     )}
                   />
                 </Box>
                 <Box display="inline" m={1}>
