@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Link } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 import { clickPosition, showOverlay } from '../../../plugins/animeBackground';
 
 interface CustomLinkProps {
@@ -9,14 +9,22 @@ interface CustomLinkProps {
 }
 
 function CLink({ to, component }: CustomLinkProps) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const fillBackground = (event: React.MouseEvent) => {
     clickPosition(event);
-    showOverlay({ complete: () => history.push(to) });
+    showOverlay({ complete: () => navigate(to) });
   };
 
-  return <Link role="banner" onClick={(event) => fillBackground(event)}>{ component }</Link>;
+  return (
+    <Link
+      role="banner"
+      onClick={(event) => fillBackground(event)}
+      style={{ textDecoration: 'none', color: 'inherit', fontSize: 'inherit' }}
+    >
+      { component }
+    </Link>
+  );
 }
 
 // https://fr.reactjs.org/docs/forwarding-refs.html
