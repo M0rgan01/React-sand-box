@@ -1,5 +1,5 @@
 import Keycloak from 'keycloak-js';
-import store from '../store';
+import { store } from '../store';
 import { setKeycloakInstanceAction, setUserProfileAction, UpdateTokenAction } from '../store/actions/authActions';
 
 const initOptions: Keycloak.KeycloakConfig = {
@@ -9,7 +9,6 @@ const initOptions: Keycloak.KeycloakConfig = {
 };
 
 export const keycloak = Keycloak(initOptions);
-
 store.dispatch(setKeycloakInstanceAction(keycloak));
 
 function initRefreshTokenInterval() {

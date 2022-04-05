@@ -1,7 +1,7 @@
 import SafeService from './SafeService';
 import axiosInstance from '../plugins/axios';
 import { TODOS } from '../plugins/urls';
-import store from '../store';
+import { store } from '../store';
 import { deleteTodoAction, saveTodoAction, setTodosAction } from '../store/actions/todosActions';
 import { Todo } from './model';
 

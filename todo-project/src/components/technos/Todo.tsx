@@ -18,7 +18,7 @@ import { v4 } from 'uuid';
 import TodoService from '../../services/TodoService';
 import { TransitionPage } from '../common/TransitionPage';
 import { LoadingButton } from '../common/LoadingButton';
-import { todosSelector } from '../../store/selectors/todosSelectors';
+import todosSelector from '../../store/selectors/todosSelectors';
 import TodoModel from '../../models/todo';
 
 export default function Todo() {
@@ -26,6 +26,7 @@ export default function Todo() {
     register, handleSubmit, formState, reset,
   } = useForm({ mode: 'onChange' });
   const todos = useSelector(todosSelector) || [];
+  console.log(todos);
   const [transitionLoading, setTransitionLoading] = useState(true);
   const [loading, setLoading] = useState(false);
 

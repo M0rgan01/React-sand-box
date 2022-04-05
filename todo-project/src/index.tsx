@@ -6,7 +6,7 @@ import { MuiThemeProvider } from '@material-ui/core';
 import App from './App';
 import ErrorCatching from './components/ErrorCatching';
 import reportWebVitals from './reportWebVitals';
-import store from './store';
+import { store } from './store';
 import './app.css';
 import muiTheme from './plugins/material-ui';
 import CustomRouter from './components/navigation/routing/CustomRouter';
