@@ -1,7 +1,15 @@
 import React, { forwardRef } from 'react';
 import { Link } from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import CSS from 'csstype';
 import { clickPosition, showOverlay } from '../../../plugins/animeBackground';
+
+const linkClass: CSS.Properties = {
+  textDecoration: 'none',
+  color: 'inherit',
+  fontSize: 'inherit',
+  textTransform: 'inherit',
+};
 
 interface CustomLinkProps {
   to: string;
@@ -10,17 +18,19 @@ interface CustomLinkProps {
 
 function CLink({ to, component }: CustomLinkProps) {
   const navigate = useNavigate();
-
+  const actualPath = useLocation().pathname;
   const fillBackground = (event: React.MouseEvent) => {
-    clickPosition(event);
-    showOverlay({ complete: () => navigate(to) });
+    if (to !== actualPath) {
+      clickPosition(event);
+      showOverlay({ complete: () => navigate(to) });
+    }
   };
 
   return (
     <Link
       role="banner"
       onClick={(event) => fillBackground(event)}
-      style={{ textDecoration: 'none', color: 'inherit', fontSize: 'inherit' }}
+      style={linkClass}
     >
       { component }
     </Link>

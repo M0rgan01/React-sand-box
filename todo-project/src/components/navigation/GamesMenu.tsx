@@ -19,7 +19,7 @@ export default function GamesMenu() {
   };
 
   return (
-    <div>
+    <>
       <Button
         startIcon={<KeyboardBackspace />}
         variant="contained"
@@ -47,6 +47,6 @@ export default function GamesMenu() {
           }
         />
       </CustomMenu>
-    </div>
+    </>
   );
 }

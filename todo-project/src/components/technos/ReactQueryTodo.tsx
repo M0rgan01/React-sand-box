@@ -1,5 +1,5 @@
 import { Add, Book, Delete } from '@material-ui/icons';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import List from '@material-ui/core/List';
 import { grey } from '@material-ui/core/colors';
@@ -16,15 +16,17 @@ import TextField from '@material-ui/core/TextField';
 import { v4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { Button } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 import ReactQueryService from '../../services/ReactQueryService';
 import { ComponentTitle } from '../common/ComponentTitle';
-import { TransitionPage } from '../common/TransitionPage';
 import { LoadingButton } from '../common/LoadingButton';
 import Todo from '../../models/todo';
+import { setMainLoading } from '../../store/actions/mainInformationActions';
 
 // https://www.youtube.com/watch?v=38wJmjeJNAk
 function ReactQueryTodo() {
-  const queryCLient = useQueryClient();
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
   const {
     register, handleSubmit, formState, reset,
   } = useForm({ mode: 'onChange' });
@@ -34,13 +36,20 @@ function ReactQueryTodo() {
   } = useQuery(queryKey, () => ReactQueryService.fetchTodos());
   const todos = data ? data.data : [];
 
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setMainLoading(true));
+    }
+    dispatch(setMainLoading(false));
+  }, [isLoading, dispatch]);
+
   const { mutate: onCreate, isLoading: createLoading } = useMutation(
     async (todo: Todo) => {
       reset();
       await ReactQueryService.saveTodos({ id: v4(), title: todo.title, complete: false });
     },
     {
-      onSuccess: () => queryCLient.invalidateQueries(queryKey),
+      onSuccess: () => queryClient.invalidateQueries(queryKey),
     },
   );
 
@@ -50,7 +59,7 @@ function ReactQueryTodo() {
       await ReactQueryService.saveTodos(todo);
     },
     {
-      onSuccess: () => queryCLient.invalidateQueries(queryKey),
+      onSuccess: () => queryClient.invalidateQueries(queryKey),
     },
   );
 
@@ -60,14 +69,13 @@ function ReactQueryTodo() {
       await ReactQueryService.deleteTodos(id);
     },
     {
-      onSuccess: () => queryCLient.invalidateQueries(queryKey),
+      onSuccess: () => queryClient.invalidateQueries(queryKey),
     },
   );
 
-  const loading = createLoading || updateLoading || deleteLoading;
-
+  const editLoading = createLoading || updateLoading || deleteLoading;
   return (
-    <TransitionPage loading={isLoading}>
+    <>
       <ComponentTitle title="React-query demonstration" icon={<Book fontSize="large" />} />
       <Box mb={1}>
         <Button
@@ -134,8 +142,8 @@ function ReactQueryTodo() {
                   <LoadingButton
                     icon={<Add />}
                     color="primary"
-                    disabled={!formState.isValid || loading}
-                    loading={loading}
+                    disabled={!formState.isValid || editLoading}
+                    loading={editLoading}
                     buttonText="add"
                   />
                 </Box>
@@ -144,7 +152,7 @@ function ReactQueryTodo() {
           </ListItemText>
         </ListItem>
       </List>
-    </TransitionPage>
+    </>
   );
 }
 

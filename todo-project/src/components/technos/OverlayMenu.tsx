@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './overlay.css';
 import { Button, Link, Typography } from '@material-ui/core';
-import { TransitionPage } from '../common/TransitionPage';
-import { clickPosition, showOverlay } from '../../plugins/animeBackground';
+import { clickPosition, hideOverlay, showOverlay } from '../../plugins/animeBackground';
 
 function OverlayMenu() {
   const [isOverlay1Open, setOverlay1Open] = useState(false);
@@ -12,9 +11,12 @@ function OverlayMenu() {
     showOverlay({ complete: () => setOverlay2Open(true) });
   };
 
+  const hideOverlay2 = () => {
+    hideOverlay();
+    setOverlay2Open(false);
+  };
   return (
-    <TransitionPage disable={isOverlay2Open}>
-
+    <>
       <Button variant="contained" onClick={() => setOverlay1Open(true)}>Open overlay</Button>
       <Button variant="contained" onClick={(e) => showOverlay2(e)}>Open overlay custom</Button>
 
@@ -38,15 +40,15 @@ function OverlayMenu() {
     && (
     <Typography className="overlay2">
 
-      <Link onClick={() => setOverlay2Open(false)}>
+      <Link onClick={hideOverlay2}>
         <span role="img" aria-label="about us">💁🏻‍♂️</span>
         About us
       </Link>
-      <Link onClick={() => setOverlay2Open(false)}>
+      <Link onClick={hideOverlay2}>
         <span role="img" aria-label="price">💸</span>
         Pricing
       </Link>
-      <Link onClick={() => setOverlay2Open(false)}>
+      <Link onClick={hideOverlay2}>
         <span role="img" aria-label="contact">📩</span>
         Contact
       </Link>
@@ -54,7 +56,7 @@ function OverlayMenu() {
     </Typography>
     )}
 
-    </TransitionPage>
+    </>
   );
 }
 
