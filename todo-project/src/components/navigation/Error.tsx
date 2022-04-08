@@ -6,7 +6,6 @@ import {
   FORBIDDEN, NOT_FOUND, UNAUTHORIZED, UNKNOWN, useQuery, WELCOME,
 } from './routing/routes';
 import CustomLink from './routing/CustomLink';
-import { TransitionPage } from '../common/TransitionPage';
 
 function defineTitle(type: string) {
   switch (type) {
@@ -28,7 +27,7 @@ export default function Error() {
   const title = type ? defineTitle(type) : '404 Not found';
 
   return (
-    <TransitionPage>
+    <>
       <ComponentTitle title={title} icon={<LiveHelp fontSize="large" />} />
       <CustomLink
         to={WELCOME}
@@ -38,6 +37,6 @@ export default function Error() {
           </Button>
 )}
       />
-    </TransitionPage>
+    </>
   );
 }
