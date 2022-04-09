@@ -21,7 +21,7 @@ export function TransitionPage({ children }: TransitionPageProps) {
         setDelayTimeout(true);
       }, minCoverDuration);
     }
-  }, [isOverlayOpen]);
+  }, [isOverlayOpen, dispatch]);
   return (
     <Fade in={delayTimeout}>
       <div>
