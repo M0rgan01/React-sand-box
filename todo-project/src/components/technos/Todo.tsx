@@ -4,7 +4,7 @@ import List from '@material-ui/core/List';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { grey } from '@material-ui/core/colors';
 import Divider from '@material-ui/core/Divider';
 import { Add, Delete } from '@material-ui/icons';
@@ -19,22 +19,21 @@ import TodoService from '../../services/TodoService';
 import { LoadingButton } from '../common/LoadingButton';
 import todosSelector from '../../store/selectors/todosSelectors';
 import TodoModel from '../../models/todo';
-import { setMainLoading } from '../../store/actions/mainInformationActions';
+import CentralLoading from '../common/CentralLoading';
 
 export default function Todo() {
   const {
     register, handleSubmit, formState, reset,
   } = useForm({ mode: 'onChange' });
   const todos = useSelector(todosSelector) || [];
-  const dispatch = useDispatch();
+  const [fetchLoading, setFetchLoading] = useState(true);
   const [loading, setLoading] = useState(false);
 
   const service = useMemo(() => new TodoService(), []);
 
   useEffect(() => {
-    dispatch(setMainLoading(true));
-    service.fetchTodos().then(() => dispatch(setMainLoading(false)));
-  }, [service, dispatch]);
+    service.fetchTodos().then(() => setFetchLoading(false));
+  }, [service]);
 
   const onCreate = async (todo: TodoModel) => {
     setLoading(true);
@@ -55,6 +54,10 @@ export default function Todo() {
     await service.deleteTodos(id);
     setLoading(false);
   };
+
+  if (fetchLoading) {
+    return <CentralLoading />;
+  }
 
   return (
     <List

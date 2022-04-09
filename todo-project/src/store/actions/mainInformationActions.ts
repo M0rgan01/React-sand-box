@@ -1,7 +1,7 @@
-import { SET_LOADING } from '../reducer/mainInformationReducer';
+import { UPDATE_OVERLAY_STATE } from '../reducer/mainInformationReducer';
 
 // eslint-disable-next-line
-export const setMainLoading = (loading: boolean) => ({
-  type: SET_LOADING,
-  payload: loading,
+export const setOverlayState = (isOpen: boolean) => ({
+  type: UPDATE_OVERLAY_STATE,
+  payload: isOpen,
 });

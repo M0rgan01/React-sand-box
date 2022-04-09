@@ -1,13 +1,13 @@
 import { AnyAction } from 'redux';
 
-export const SET_LOADING = 'SET_LOADING';
+export const UPDATE_OVERLAY_STATE = 'UPDATE_OVERLAY_STATE';
 
 interface MainInformationReducerState {
-  loading: boolean;
+  isOverlayOpen: boolean;
 }
 
 const initialState: MainInformationReducerState = {
-  loading: false,
+  isOverlayOpen: true,
 };
 
 export const initialAction: AnyAction = {
@@ -16,8 +16,8 @@ export const initialAction: AnyAction = {
 
 export function MainInformationReducer(state = initialState, action = initialAction) {
   switch (action.type) {
-    case SET_LOADING:
-      return { ...state, loading: action.payload };
+    case UPDATE_OVERLAY_STATE:
+      return { ...state, isOverlayOpen: action.payload };
     default:
       return state;
   }
