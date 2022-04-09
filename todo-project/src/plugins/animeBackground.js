@@ -92,15 +92,17 @@ export const showOverlay = (opt) => {
     if (!options.fill) {
       options.fill = getRandomColor();
     }
-
     overlay.c.style.zIndex = '2';
     overlay.lastStartingPoint = options.position;
-
     options.targetRadius = calcPageFillRadius(options.position.x, options.position.y);
     options.startRadius = 0;
     options.easing = 'easeOutQuart';
+
+    const callback = options.complete;
+    options.complete = () => {
+      if (callback) callback();
+    };
     animateFill(options);
-    overlay.open = true;
   }
 };
 
@@ -127,16 +129,15 @@ export const hideOverlay = (opt) => {
       }
     }
 
+    options.startRadius = calcPageFillRadius(options.position.x, options.position.y);
+
     const callback = options.complete;
     options.complete = () => {
       overlay.c.style.zIndex = '0';
       overlay.bgColor = 'transparent';
       if (callback) callback();
     };
-
-    options.startRadius = calcPageFillRadius(options.position.x, options.position.y);
     animateFill(options);
-    overlay.open = false;
   }
 };
 

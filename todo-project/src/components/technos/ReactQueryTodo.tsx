@@ -1,5 +1,5 @@
 import { Add, Book, Delete } from '@material-ui/icons';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import List from '@material-ui/core/List';
 import { grey } from '@material-ui/core/colors';
@@ -16,32 +16,23 @@ import TextField from '@material-ui/core/TextField';
 import { v4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { Button } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
 import ReactQueryService from '../../services/ReactQueryService';
 import { ComponentTitle } from '../common/ComponentTitle';
 import { LoadingButton } from '../common/LoadingButton';
 import Todo from '../../models/todo';
-import { setMainLoading } from '../../store/actions/mainInformationActions';
+import CentralLoading from '../common/CentralLoading';
 
 // https://www.youtube.com/watch?v=38wJmjeJNAk
 function ReactQueryTodo() {
   const queryClient = useQueryClient();
-  const dispatch = useDispatch();
   const {
     register, handleSubmit, formState, reset,
   } = useForm({ mode: 'onChange' });
   const queryKey = ['fetchAll'];
   const {
-    isLoading, isFetching, data, refetch,
+    isLoading: fetchLoading, isFetching, data, refetch,
   } = useQuery(queryKey, () => ReactQueryService.fetchTodos());
   const todos = data ? data.data : [];
-
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(setMainLoading(true));
-    }
-    dispatch(setMainLoading(false));
-  }, [isLoading, dispatch]);
 
   const { mutate: onCreate, isLoading: createLoading } = useMutation(
     async (todo: Todo) => {
@@ -73,6 +64,10 @@ function ReactQueryTodo() {
     },
   );
 
+  if (fetchLoading) {
+    return <CentralLoading />;
+  }
+
   const editLoading = createLoading || updateLoading || deleteLoading;
   return (
     <>
@@ -86,7 +81,7 @@ function ReactQueryTodo() {
         </Button>
 
         {isFetching && <Box display="inline" ml={1}>Fetching</Box>}
-        {isLoading && <Box display="inline" ml={1}>Loading</Box>}
+        {fetchLoading && <Box display="inline" ml={1}>Loading</Box>}
       </Box>
 
       <List
