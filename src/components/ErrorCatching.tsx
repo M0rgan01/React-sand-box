@@ -1,7 +1,7 @@
 import React, { ErrorInfo } from 'react';
 
 interface ErrorCatchingProps {
-  children: React.ReactNode;
+  children: React.ReactElement;
 }
 
 interface ErrorCatchingState {

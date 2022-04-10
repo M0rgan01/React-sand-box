@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Book } from '@material-ui/icons';
-import { Button } from '@material-ui/core';
+import { Book } from '@mui/icons-material';
+import { Button } from '@mui/material';
 import { ComponentTitle } from '../common/ComponentTitle';
 import { gameClose, initGame } from '../../plugins/matterGame';
 

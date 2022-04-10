@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book } from '@material-ui/icons';
+import { Book } from '@mui/icons-material';
 import { ComponentTitle } from '../common/ComponentTitle';
 import './Checkers.css';
 

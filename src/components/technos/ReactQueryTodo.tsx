@@ -1,21 +1,19 @@
-import { Add, Book, Delete } from '@material-ui/icons';
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import List from '@material-ui/core/List';
-import { grey } from '@material-ui/core/colors';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Checkbox from '@material-ui/core/Checkbox';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import IconButton from '@material-ui/core/IconButton';
-import red from '@material-ui/core/colors/red';
-import Divider from '@material-ui/core/Divider';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
 import { v4 } from 'uuid';
 import { useForm } from 'react-hook-form';
-import { Button } from '@material-ui/core';
+import {
+  Box,
+  Button, Checkbox,
+  Divider,
+  IconButton, List,
+  ListItem,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText, TextField,
+} from '@mui/material';
+import { Add, Book, Delete } from '@mui/icons-material';
+import { grey, red } from '@mui/material/colors';
 import ReactQueryService from '../../services/ReactQueryService';
 import { ComponentTitle } from '../common/ComponentTitle';
 import { LoadingButton } from '../common/LoadingButton';
@@ -32,7 +30,7 @@ function ReactQueryTodo() {
   const {
     isLoading: fetchLoading, isFetching, data, refetch,
   } = useQuery(queryKey, () => ReactQueryService.fetchTodos());
-  const todos = data ? data.data : [];
+  const todos: Todo[] = data ? data.data : [];
 
   const { mutate: onCreate, isLoading: createLoading } = useMutation(
     async (todo: Todo) => {

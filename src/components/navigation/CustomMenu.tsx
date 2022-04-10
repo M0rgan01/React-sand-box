@@ -1,13 +1,11 @@
 import React, { forwardRef } from 'react';
-import Menu from '@material-ui/core/Menu';
-import { MenuProps } from '@material-ui/core/Menu/Menu';
+import { Menu, MenuProps } from '@mui/material';
 
 const menu = ((props: MenuProps, ref: any) => (
   <Menu
     ref={ref}
     {...props}
     keepMounted
-    getContentAnchorEl={null}
     anchorOrigin={{
       vertical: 'bottom',
       horizontal: 'center',

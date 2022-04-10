@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Container } from '@material-ui/core';
+import { Box, Container } from '@mui/material';
 import initKeycloak from './plugins/keycloak';
 import AppRoutes from './components/navigation/routing/AppRoutes';
 import MainNavigation from './components/navigation/MainNavigation';

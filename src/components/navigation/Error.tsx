@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import { KeyboardBackspace, LiveHelp } from '@material-ui/icons';
+import { KeyboardBackspace, LiveHelp } from '@mui/icons-material';
+import { Button } from '@mui/material';
 import { ComponentTitle } from '../common/ComponentTitle';
 import {
   FORBIDDEN, NOT_FOUND, UNAUTHORIZED, UNKNOWN, useQuery, WELCOME,

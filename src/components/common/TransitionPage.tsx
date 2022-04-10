@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Fade } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
+import { Fade } from '@mui/material';
 import { hideOverlay, minCoverDuration } from '../../plugins/animeBackground';
 import { isOverlayOpenSelector } from '../../store/selectors/mainInformationSelectors';
 import { setOverlayState } from '../../store/actions/mainInformationActions';

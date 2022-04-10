@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
-import { Link } from '@material-ui/core';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CSS from 'csstype';
+import { Link } from '@mui/material';
 import { clickPosition, showOverlay } from '../../../plugins/animeBackground';
 import { store } from '../../../store';
 import { setOverlayState } from '../../../store/actions/mainInformationActions';

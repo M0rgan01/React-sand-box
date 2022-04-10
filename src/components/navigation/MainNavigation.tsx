@@ -1,12 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
+import { useSelector } from 'react-redux';
+import { Box, Button, Slide } from '@mui/material';
 import {
   AccountCircle, ExitToApp, Home, LockOpen,
-} from '@material-ui/icons';
-import Box from '@material-ui/core/Box';
-import { useSelector } from 'react-redux';
-import { lightGreen, red } from '@material-ui/core/colors';
-import { Slide } from '@material-ui/core';
+} from '@mui/icons-material';
+import { lightGreen, red } from '@mui/material/colors';
 import {
   isAuthenticatedSelector,
   loginSelector,

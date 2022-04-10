@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import { Fade } from '@material-ui/core';
+import { Fade } from '@mui/material';
 import { minCoverDuration } from '../../plugins/animeBackground';
 
 interface CustomTransitionProps {

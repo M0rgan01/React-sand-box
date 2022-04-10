@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import MenuItem from '@material-ui/core/MenuItem';
-import { KeyboardBackspace } from '@material-ui/icons';
-import lightBlue from '@material-ui/core/colors/lightBlue';
+import { Button, MenuItem } from '@mui/material';
+import { KeyboardBackspace } from '@mui/icons-material';
+import { lightBlue } from '@mui/material/colors';
 import CustomMenu from './CustomMenu';
 import CustomLink from './routing/CustomLink';
 import { OVERLAY_MENU, REACT_QUERY, TODOS } from './routing/routes';
@@ -19,7 +18,7 @@ export default function TechnosMenu() {
   };
 
   return (
-    <div>
+    <>
       <Button
         startIcon={<KeyboardBackspace />}
         variant="contained"
@@ -53,6 +52,6 @@ export default function TechnosMenu() {
         }
         />
       </CustomMenu>
-    </div>
+    </>
   );
 }
