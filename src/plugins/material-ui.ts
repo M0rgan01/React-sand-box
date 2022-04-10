@@ -1,10 +1,5 @@
 import { createTheme } from '@mui/material';
 
-const palette = {
-  primary: {
-    main: '#ee4db5',
-    contrastText: '#93d759',
-  },
-};
+const palette = {};
 
 export default createTheme({ palette });

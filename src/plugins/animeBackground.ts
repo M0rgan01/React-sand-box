@@ -49,7 +49,6 @@ const overlay: Overlay = {
   y: 0,
   cH: 0,
   cW: 0,
-  bgColor: getRandomColor(),
   circle: {
     draw: (targetRadius: number, startRadius: number) => drawCircle(targetRadius, startRadius),
   },
@@ -122,8 +121,8 @@ export const onAppInit = () => {
   if (element && context) {
     overlay.element = element;
     overlay.context = context;
-    overlay.bgColor = getRandomColor();
-    overlay.element.style.zIndex = '1';
+    overlay.bgColor = 'transparent';
+    overlay.element.style.zIndex = '-1';
     resizeCanvas();
     overlay.lastStartingPoint = { x: 0, y: 0 };
     window.addEventListener('resize', resizeCanvas);
@@ -147,7 +146,7 @@ export const showOverlay = (opt: AnimeBackgroundProps) => {
     if (!options.fill) {
       options.fill = getRandomColor();
     }
-    overlay.element!.style.zIndex = '2';
+    overlay.element!.style.zIndex = '1101';
     overlay.lastStartingPoint = options.position;
     options.targetRadius = calcPageFillRadius(options.position.x, options.position.y);
     options.startRadius = 0;
