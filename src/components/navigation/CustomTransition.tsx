@@ -1,9 +1,9 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Fade } from '@mui/material';
 import { minCoverDuration } from '../../plugins/animeBackground';
 
 interface CustomTransitionProps {
-  children: ReactElement;
+  children: ReactNode;
 }
 
 export default function CustomTransition({ children }: CustomTransitionProps) {
@@ -15,7 +15,9 @@ export default function CustomTransition({ children }: CustomTransitionProps) {
 
   return (
     <Fade in={delayTimeout}>
-      { children }
+      <div>
+        { children }
+      </div>
     </Fade>
   );
 }

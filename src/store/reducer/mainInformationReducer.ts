@@ -7,7 +7,7 @@ interface MainInformationReducerState {
 }
 
 const initialState: MainInformationReducerState = {
-  isOverlayOpen: true,
+  isOverlayOpen: false,
 };
 
 export const initialAction: AnyAction = {

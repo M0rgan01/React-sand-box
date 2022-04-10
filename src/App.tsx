@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Container } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
+import { Container } from '@mui/material';
 import initKeycloak from './plugins/keycloak';
 import AppRoutes from './components/navigation/routing/AppRoutes';
-import MainNavigation from './components/navigation/MainNavigation';
 import { onAppInit } from './plugins/animeBackground';
 import CentralLoading from './components/common/CentralLoading';
+import AppBar from './components/navigation/AppBar';
 
 function App() {
   const [loading, setLoading] = useState(true);
-
+  const appBarRef = useRef();
   useEffect(() => {
     onAppInit();
     initKeycloak().then(() => {
@@ -23,9 +23,8 @@ function App() {
   }
   return (
     <>
-      <MainNavigation />
-      <Box id="header-bottom" />
-      <Container maxWidth="md">
+      <AppBar appBarRef={appBarRef} />
+      <Container maxWidth="md" sx={{ mt: 2 }}>
         <AppRoutes />
       </Container>
     </>

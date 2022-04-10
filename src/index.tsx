@@ -16,20 +16,18 @@ const queryClient = new QueryClient();
 
 ReactDOM.render(
   <CustomRouter history={history}>
-    <>
-      <canvas id="backgroundAnimate" />
-      <Provider store={store}>
-        <ThemeProvider theme={muiTheme}>
-          <QueryClientProvider client={queryClient}>
-            <ErrorCatching>
-              <div id="app">
-                <App />
-              </div>
-            </ErrorCatching>
-          </QueryClientProvider>
-        </ThemeProvider>
-      </Provider>
-    </>
+    <Provider store={store}>
+      <ThemeProvider theme={muiTheme}>
+        <QueryClientProvider client={queryClient}>
+          <ErrorCatching>
+            <div id="app">
+              <canvas id="backgroundAnimate" />
+              <App />
+            </div>
+          </ErrorCatching>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </Provider>
   </CustomRouter>,
   document.getElementById('root'),
 );

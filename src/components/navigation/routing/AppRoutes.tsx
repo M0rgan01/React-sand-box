@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import React from 'react';
 import { routesItems } from './routes';
 import PrivateRoute from './PrivateRoute';
-import TransitionPage from '../../common/TransitionPage';
+import CustomTransition from '../CustomTransition';
 
 function AppRoutes() {
   return (
@@ -14,9 +14,9 @@ function AppRoutes() {
               <Route
                 path={route.route}
                 element={(
-                  <TransitionPage>
+                  <CustomTransition>
                     {route.element}
-                  </TransitionPage>
+                  </CustomTransition>
 )}
               />
             </Route>
@@ -26,9 +26,9 @@ function AppRoutes() {
               key={route.route}
               path={route.route}
               element={(
-                <TransitionPage>
+                <CustomTransition>
                   {route.element}
-                </TransitionPage>
+                </CustomTransition>
 )}
             />
           )
