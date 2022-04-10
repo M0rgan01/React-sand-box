@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts src/test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .tsx,.ts,.js ./src"
+    "lint": "eslint --ext .tsx,.ts,.js src"
   },
   "devDependencies": {
     "@types/animejs": "^3.1.4",
