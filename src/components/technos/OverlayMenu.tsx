@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './overlay.css';
-import { Button, Link, Typography } from '@material-ui/core';
+import { Button, Link, Typography } from '@mui/material';
 import { clickPosition, hideOverlay, showOverlay } from '../../plugins/animeBackground';
 
 function OverlayMenu() {

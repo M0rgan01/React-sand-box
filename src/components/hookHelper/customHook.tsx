@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 function useIncrement(base: number, step: number): [number, () => void] {
   const [count, setCount] = useState(base);

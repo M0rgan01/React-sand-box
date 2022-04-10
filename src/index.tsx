@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { MuiThemeProvider } from '@material-ui/core';
+import { ThemeProvider } from '@mui/material';
 import App from './App';
 import ErrorCatching from './components/ErrorCatching';
 import reportWebVitals from './reportWebVitals';
@@ -19,7 +19,7 @@ ReactDOM.render(
     <>
       <canvas id="backgroundAnimate" />
       <Provider store={store}>
-        <MuiThemeProvider theme={muiTheme}>
+        <ThemeProvider theme={muiTheme}>
           <QueryClientProvider client={queryClient}>
             <ErrorCatching>
               <div id="app">
@@ -27,7 +27,7 @@ ReactDOM.render(
               </div>
             </ErrorCatching>
           </QueryClientProvider>
-        </MuiThemeProvider>
+        </ThemeProvider>
       </Provider>
     </>
   </CustomRouter>,

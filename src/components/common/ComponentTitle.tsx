@@ -1,7 +1,6 @@
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { Variant } from '@mui/material/styles/createTypography';
+import { Box, Typography } from '@mui/material';
 
 interface ComponentTitleProps {
   title: string;

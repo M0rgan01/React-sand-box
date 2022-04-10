@@ -1,7 +1,7 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { Book } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
+import { Book } from '@mui/icons-material';
+import { Typography } from '@mui/material';
 import { ComponentTitle } from './common/ComponentTitle';
 import { isAuthenticatedSelector } from '../store/selectors/authSelectors';
 

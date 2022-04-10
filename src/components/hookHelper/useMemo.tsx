@@ -1,6 +1,6 @@
 // https://www.youtube.com/watch?v=wNX5iRhczHM&list=PLjwdMgw5TTLWom67YfZuha-1iYzIirwJR&index=18
 import React, { useState } from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField } from '@mui/material';
 
 function encode(number: number) {
   wait(1000);

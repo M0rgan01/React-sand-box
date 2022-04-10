@@ -1,4 +1,4 @@
-import axios from 'src/plugins/axios';
+import axios from 'axios';
 import { isAuthenticatedSelector, realmSelector, tokenSelector } from '../store/selectors/authSelectors';
 import { store } from '../store';
 import history from './history';

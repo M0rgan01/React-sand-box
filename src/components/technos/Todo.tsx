@@ -1,20 +1,20 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
 import { useSelector } from 'react-redux';
-import { grey } from '@material-ui/core/colors';
-import Divider from '@material-ui/core/Divider';
-import { Add, Delete } from '@material-ui/icons';
-import TextField from '@material-ui/core/TextField';
 import { useForm } from 'react-hook-form';
-import Box from '@material-ui/core/Box';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import IconButton from '@material-ui/core/IconButton';
-import red from '@material-ui/core/colors/red';
 import { v4 } from 'uuid';
+import {
+  Box,
+  Checkbox,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText, TextField,
+} from '@mui/material';
+import { grey, red } from '@mui/material/colors';
+import { Add, Delete } from '@mui/icons-material';
 import TodoService from '../../services/TodoService';
 import { LoadingButton } from '../common/LoadingButton';
 import todosSelector from '../../store/selectors/todosSelectors';

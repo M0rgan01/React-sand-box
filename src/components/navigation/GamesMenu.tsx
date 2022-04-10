@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import MenuItem from '@material-ui/core/MenuItem';
-import { KeyboardBackspace } from '@material-ui/icons';
-import { amber } from '@material-ui/core/colors';
+import { Button, MenuItem } from '@mui/material';
+import { amber } from '@mui/material/colors';
+import { KeyboardBackspace } from '@mui/icons-material';
 import CustomMenu from './CustomMenu';
 import CustomLink from './routing/CustomLink';
 import { CHECKERS_GAME, MATTER_GAME } from './routing/routes';

@@ -1,4 +1,4 @@
-import { createBrowserHistory } from 'src/plugins/history';
+import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
 
