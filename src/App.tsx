@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <AppBar appBarRef={appBarRef} />
-      <Container maxWidth="md" sx={{ mt: 2 }}>
+      <Container maxWidth="md" sx={{ mt: 4 }}>
         <AppRoutes />
       </Container>
     </>
