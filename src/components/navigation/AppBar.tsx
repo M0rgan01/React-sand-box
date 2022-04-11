@@ -1,12 +1,14 @@
 import {
   AppBar as AppBarMui, Button, IconButton, Slide, Toolbar, Typography, useScrollTrigger,
 } from '@mui/material';
-import React, { MutableRefObject, useCallback } from 'react';
+import React, { MutableRefObject, useCallback, useState } from 'react';
 import { SxProps, Theme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { LockOpen, Menu } from '@mui/icons-material';
 import { isAuthenticatedSelector, loginSelector } from '../../store/selectors/authSelectors';
 import AccountMenu from './AccountMenu';
+import { clickPosition, hideOverlay, showOverlay } from '../../plugins/animeBackground';
+import Overlay from './Overlay';
 
 const appBarClass: SxProps<Theme> = {
   boxShadow: '0px 15px 10px -15px #111',
@@ -18,11 +20,22 @@ interface AppBarProps {
 
 function AppBar({ appBarRef }: AppBarProps) {
   const trigger = useScrollTrigger();
+  const [isOverlayOpen, setOverlayOpen] = useState(false);
   const login = useSelector(loginSelector);
   const auth = useSelector(isAuthenticatedSelector);
   const onLogin = useCallback(() => {
     login();
   }, [login]);
+
+  const openOverlay = (event: React.MouseEvent) => {
+    clickPosition(event);
+    showOverlay({ complete: () => setOverlayOpen(true) });
+  };
+
+  const closeOverlay = () => {
+    hideOverlay();
+    setOverlayOpen(false);
+  };
 
   return (
     <>
@@ -30,6 +43,7 @@ function AppBar({ appBarRef }: AppBarProps) {
         <AppBarMui sx={appBarClass}>
           <Toolbar sx={{ justifyContent: 'space-between' }}>
             <IconButton
+              onClick={openOverlay}
               size="large"
               edge="start"
               color="inherit"
@@ -53,12 +67,12 @@ function AppBar({ appBarRef }: AppBarProps) {
                     Login
                   </Button>
                 )
-
             }
           </Toolbar>
         </AppBarMui>
       </Slide>
       <Toolbar ref={appBarRef} />
+      { isOverlayOpen && <Overlay hideOverlay={closeOverlay} />}
     </>
   );
 }
