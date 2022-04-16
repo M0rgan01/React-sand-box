@@ -22,6 +22,7 @@ import SyncIcon from '@mui/icons-material/Sync';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import ApiIcon from '@mui/icons-material/Api';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import { useSelector } from 'react-redux';
 import { backgroundZIndex } from '../../plugins/animeBackground';
 import {
   CHECKERS_GAME,
@@ -34,6 +35,7 @@ import {
   USE_REDUCER,
   WELCOME,
 } from './routing/routes';
+import { keycloakSelector } from '../../store/selectors/authSelectors';
 
 const exitButtonClass: SxProps<Theme> = {
   position: 'absolute',
@@ -71,6 +73,7 @@ interface OverlayProps {
 
 function Overlay({ hideOverlay }: OverlayProps) {
   const navigate = useNavigate();
+  const keycloak = useSelector(keycloakSelector);
   const [labsOpen, setLabsOpen] = useState(false);
   const [hookOpen, setHooksOpen] = useState(false);
   const [apiOpen, setApiOpen] = useState(false);
@@ -84,7 +87,11 @@ function Overlay({ hideOverlay }: OverlayProps) {
   };
 
   const handleApiClick = () => {
-    setApiOpen(!apiOpen);
+    if (!keycloak?.authenticated) {
+      keycloak?.login();
+    } else {
+      setApiOpen(!apiOpen);
+    }
   };
 
   const onNavigate = (destination: string) => {
@@ -171,7 +178,7 @@ function Overlay({ hideOverlay }: OverlayProps) {
             </ListItemButton>
           </List>
         </Collapse>
-        <ListItemButton onClick={handleApiClick}>
+        <ListItemButton disabled={!keycloak} onClick={handleApiClick}>
           <ListItemIcon>
             <ApiIcon sx={{ color: 'white' }} />
           </ListItemIcon>

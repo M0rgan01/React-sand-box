@@ -5,7 +5,7 @@ import React, { MutableRefObject, useCallback, useState } from 'react';
 import { SxProps, Theme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { LockOpen, Menu } from '@mui/icons-material';
-import { isAuthenticatedSelector, loginSelector } from '../../store/selectors/authSelectors';
+import { keycloakSelector } from '../../store/selectors/authSelectors';
 import AccountMenu from './AccountMenu';
 import { clickPosition, hideOverlay, showOverlay } from '../../plugins/animeBackground';
 import Overlay from './Overlay';
@@ -21,11 +21,10 @@ interface AppBarProps {
 function AppBar({ appBarRef }: AppBarProps) {
   const trigger = useScrollTrigger();
   const [isOverlayOpen, setOverlayOpen] = useState(false);
-  const login = useSelector(loginSelector);
-  const auth = useSelector(isAuthenticatedSelector);
+  const keycloak = useSelector(keycloakSelector);
   const onLogin = useCallback(() => {
-    login();
-  }, [login]);
+    keycloak?.login();
+  }, [keycloak]);
 
   const openOverlay = (event: React.MouseEvent) => {
     clickPosition(event);
@@ -55,10 +54,11 @@ function AppBar({ appBarRef }: AppBarProps) {
               React-sand-box
             </Typography>
             {
-              auth
+              keycloak?.authenticated
                 ? <AccountMenu />
                 : (
                   <Button
+                    disabled={!keycloak}
                     startIcon={<LockOpen />}
                     onClick={onLogin}
                     color="success"

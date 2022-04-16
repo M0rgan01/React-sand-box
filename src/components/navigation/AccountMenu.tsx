@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 import {
-  Box, Button, Divider, ListItem, ListItemIcon, ListItemText, Menu, Typography,
+  Box, Divider, IconButton, ListItem, ListItemIcon, ListItemText, Menu, Typography,
 } from '@mui/material';
-import { AccountCircle, ExitToApp, Lock } from '@mui/icons-material';
+import { AccountBox, ExitToApp } from '@mui/icons-material';
 import React, { MouseEvent, useCallback, useState } from 'react';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { logoutSelector, profileUrlSelector, userEmailSelector } from '../../store/selectors/authSelectors';
 
 export default function AccountMenu() {
@@ -33,17 +34,13 @@ profileUrl!,
 
   return (
     <div>
-      <Button
+      <IconButton
         aria-controls="simple-menu"
-        size="small"
-        color="secondary"
-        startIcon={<Lock />}
         aria-haspopup="true"
         onClick={handleClick}
-        variant="contained"
       >
-        Account
-      </Button>
+        <AccountCircleIcon sx={{ color: 'white' }} />
+      </IconButton>
       <Menu
         sx={{ marginTop: '10px' }}
         id="account-menu"
@@ -73,7 +70,7 @@ profileUrl!,
         </Box>
         <ListItem dense button onClick={onOpenProfile}>
           <ListItemIcon>
-            <AccountCircle fontSize="small" />
+            <AccountBox fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="My account" />
         </ListItem>

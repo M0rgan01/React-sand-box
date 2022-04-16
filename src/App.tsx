@@ -11,9 +11,9 @@ function App() {
   const appBarRef = useRef();
   useEffect(() => {
     onAppInit();
-    initKeycloak().then(() => {
-      setLoading(false);
-    });
+    initKeycloak()
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, []);
 
   if (loading) {
