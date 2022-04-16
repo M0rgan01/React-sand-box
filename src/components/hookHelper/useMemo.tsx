@@ -1,5 +1,5 @@
 // https://www.youtube.com/watch?v=wNX5iRhczHM&list=PLjwdMgw5TTLWom67YfZuha-1iYzIirwJR&index=18
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { TextField } from '@mui/material';
 
 function encode(number: number) {
@@ -18,7 +18,7 @@ function wait(duration: number) {
   return true;
 }
 
-function UseMemoDemo() {
+export default function UseMemoDemo() {
   const [name, setName] = useState('name');
   const [number, setNumber] = useState(0);
 
@@ -40,7 +40,7 @@ function UseMemoDemo() {
   // -> sans le useMemo, la modification de l'autre champ aurais re-rendu
   // le composant et donc éxécuté à nouveau
   // la méthode encode (et donc l'attente de 1s)
-  const encodeNumber = React.useMemo(() => {
+  const encodeNumber = useMemo(() => {
     console.log('rendu pour encodeNumber');
     return encode(number);
   }, [number]);

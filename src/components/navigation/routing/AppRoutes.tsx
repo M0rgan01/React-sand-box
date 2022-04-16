@@ -14,7 +14,7 @@ function AppRoutes() {
               <Route
                 path={route.route}
                 element={(
-                  <CustomTransition>
+                  <CustomTransition title={route.title}>
                     {route.element}
                   </CustomTransition>
 )}
@@ -26,7 +26,7 @@ function AppRoutes() {
               key={route.route}
               path={route.route}
               element={(
-                <CustomTransition>
+                <CustomTransition title={route.title}>
                   {route.element}
                 </CustomTransition>
 )}
