@@ -9,7 +9,6 @@ const initOptions: Keycloak.KeycloakConfig = {
 };
 
 export const keycloak = Keycloak(initOptions);
-store.dispatch(setKeycloakInstanceAction(keycloak));
 
 function initRefreshTokenInterval() {
   const refreshInterval = setInterval(() => {
@@ -32,21 +31,23 @@ function initRefreshTokenInterval() {
 
 export default function initKeycloak() {
   return new Promise<void>((resolve, reject) => {
+    const keycloakDownCheck = setTimeout(() => reject(), 3000);
     const silentCheckSsoRedirectUri = `${process.env.REACT_APP_KEYCLOAK_REDIRECT_URL}/${process.env.REACT_APP_KEYCLOAK_SILENT_SSO_FILE_NAME}`;
-    keycloak.init({ onLoad: 'check-sso', silentCheckSsoRedirectUri }).then((auth) => {
-      if (auth) {
+    keycloak.init({ onLoad: 'check-sso', silentCheckSsoRedirectUri })
+      .then((auth) => {
+        if (auth) {
+          keycloak.loadUserProfile().then((keycloakProfile) => {
+            store.dispatch(setUserProfileAction(keycloakProfile));
+            initRefreshTokenInterval();
+          });
+        }
         store.dispatch(setKeycloakInstanceAction(keycloak));
-        keycloak.loadUserProfile().then((keycloakProfile) => {
-          store.dispatch(setUserProfileAction(keycloakProfile));
-          initRefreshTokenInterval();
-        });
+        clearTimeout(keycloakDownCheck);
         resolve();
-      } else {
-        resolve();
-      }
-    }).catch(() => {
-      console.error('Authenticated Failed');
-      reject();
-    });
+      })
+      .catch(() => {
+        console.error('Authenticated Failed');
+        reject();
+      });
   });
 }
