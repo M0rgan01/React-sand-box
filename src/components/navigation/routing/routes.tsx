@@ -7,6 +7,9 @@ import ReactQueryTodo from '../../technos/ReactQueryTodo';
 import OverlayMenu from '../../technos/OverlayMenu';
 import MatterGame from '../../games/MatterGame';
 import CheckersGame from '../../games/CheckersGame';
+import UseReducerDemo from '../../hookHelper/useReducer';
+import UseMemoDemo from '../../hookHelper/useMemo';
+import CustomHookDemo from '../../hookHelper/customHook';
 
 export const ERROR = '/error';
 export const FORBIDDEN = 'forbidden';
@@ -24,6 +27,9 @@ export const OVERLAY_MENU = '/overlay';
 export const WELCOME = '/welcome';
 export const MATTER_GAME = '/matter-game';
 export const CHECKERS_GAME = '/checkers-game';
+export const USE_MEMO = '/use-memo';
+export const USE_REDUCER = '/use-reducer';
+export const USE_CUSTOM = '/use-custom';
 
 export function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -68,19 +74,37 @@ export const routesItems: RouteItem[] = [
     title: 'Overlay menu',
     route: OVERLAY_MENU,
     element: <OverlayMenu />,
-    isPrivate: true,
+    isPrivate: false,
   },
   {
     title: 'Matter game',
     route: MATTER_GAME,
     element: <MatterGame />,
-    isPrivate: true,
+    isPrivate: false,
   },
   {
     title: 'Checkers Game',
     route: CHECKERS_GAME,
     element: <CheckersGame />,
-    isPrivate: true,
+    isPrivate: false,
+  },
+  {
+    title: 'Use memo',
+    route: USE_MEMO,
+    element: <UseMemoDemo />,
+    isPrivate: false,
+  },
+  {
+    title: 'Use reducer',
+    route: USE_REDUCER,
+    element: <UseReducerDemo />,
+    isPrivate: false,
+  },
+  {
+    title: 'Custom hook',
+    route: USE_CUSTOM,
+    element: <CustomHookDemo />,
+    isPrivate: false,
   },
   {
     title: 'Error 404',
