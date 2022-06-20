@@ -2,14 +2,15 @@ import { Navigate, useLocation } from 'react-router-dom';
 import React, { ReactElement } from 'react';
 import Welcome from '../../Welcome';
 import Error from '../Error';
-import Todo from '../../technos/Todo';
-import ReactQueryTodo from '../../technos/ReactQueryTodo';
-import OverlayMenu from '../../technos/OverlayMenu';
-import MatterGame from '../../games/MatterGame';
-import CheckersGame from '../../games/CheckersGame';
-import UseReducerDemo from '../../hookHelper/useReducer';
-import UseMemoDemo from '../../hookHelper/useMemo';
-import CustomHookDemo from '../../hookHelper/customHook';
+import Todo from '../../apiCommunications/Todo';
+import ReactQueryTodo from '../../apiCommunications/ReactQueryTodo';
+import OverlayMenu from '../../labs/OverlayMenu';
+import MatterGame from '../../labs/MatterGame';
+import CheckersGame from '../../labs/CheckersGame';
+import UseReducerDemo from '../../hooksDemos/useReducer';
+import UseMemoDemo from '../../hooksDemos/useMemo';
+import CustomHookDemo from '../../hooksDemos/customHook';
+import UseCallbackDemo from '../../hooksDemos/useCallback';
 
 export const ERROR = '/error';
 export const FORBIDDEN = 'forbidden';
@@ -28,6 +29,7 @@ export const WELCOME = '/welcome';
 export const MATTER_GAME = '/matter-game';
 export const CHECKERS_GAME = '/checkers-game';
 export const USE_MEMO = '/use-memo';
+export const USE_CALLBACK = '/use-callback';
 export const USE_REDUCER = '/use-reducer';
 export const USE_CUSTOM = '/use-custom';
 
@@ -92,6 +94,12 @@ export const routesItems: RouteItem[] = [
     title: 'Use memo',
     route: USE_MEMO,
     element: <UseMemoDemo />,
+    isPrivate: false,
+  },
+  {
+    title: 'Use callback',
+    route: USE_CALLBACK,
+    element: <UseCallbackDemo />,
     isPrivate: false,
   },
   {

@@ -22,6 +22,7 @@ import SyncIcon from '@mui/icons-material/Sync';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import ApiIcon from '@mui/icons-material/Api';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import CallReceivedIcon from '@mui/icons-material/CallReceived';
 import { useSelector } from 'react-redux';
 import { backgroundZIndex } from '../../plugins/animeBackground';
 import {
@@ -29,7 +30,7 @@ import {
   MATTER_GAME,
   OVERLAY_MENU,
   REACT_QUERY,
-  TODOS,
+  TODOS, USE_CALLBACK,
   USE_CUSTOM,
   USE_MEMO,
   USE_REDUCER,
@@ -163,6 +164,12 @@ function Overlay({ hideOverlay }: OverlayProps) {
                 <SyncIcon sx={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary="Use memo demo" />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }} onClick={() => onNavigate(USE_CALLBACK)}>
+              <ListItemIcon>
+                <CallReceivedIcon sx={{ color: 'white' }} />
+              </ListItemIcon>
+              <ListItemText primary="Use callback demo" />
             </ListItemButton>
             <ListItemButton sx={{ pl: 4 }} onClick={() => onNavigate(USE_REDUCER)}>
               <ListItemIcon>

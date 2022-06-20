@@ -1,5 +1,7 @@
 import React, { useReducer } from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
+import { Archive } from '@mui/icons-material';
+import ComponentTitle from '../common/ComponentTitle';
 
 interface Action {
   type: string;
@@ -50,17 +52,17 @@ export default function UseReducerDemo() {
 
   return (
     <>
-      <h1>Bonjour</h1>
-      <p>
+      <ComponentTitle title="Use reducer demonstration" icon={<Archive fontSize="large" />} />
+      <Typography>
         Compteur :
         {count}
-      </p>
+      </Typography>
       <Button onClick={() => dispatch({ type: ActionTypes.INCREMENT })}>Increment</Button>
       <Button onClick={() => dispatch({ type: ActionTypes.DECREMENT })}>Decrement</Button>
-      <p>
+      <Typography>
         Compteur (version object) :
         {count2.count}
-      </p>
+      </Typography>
       <Button onClick={() => dispatch2({ type: ActionTypes.INCREMENT })}>Increment</Button>
       <Button onClick={() => dispatch2({ type: ActionTypes.DECREMENT })}>Decrement</Button>
     </>
