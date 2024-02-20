@@ -5,7 +5,7 @@ import React from 'react';
 // https://codepen.io/alexzaworski/pen/mEkvAG
 
 export const backgroundZIndex = 1101;
-export const minCoverDuration = 750;
+export const minCoverDuration = 300;
 const colors = ['#42464d', '#787878', '#d15f02', '#003c80', '#00802b', '#9c0031'];
 
 interface AnimeBackgroundProps {

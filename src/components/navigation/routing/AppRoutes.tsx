@@ -17,7 +17,7 @@ function AppRoutes() {
                   <CustomTransition title={route.title}>
                     {route.element}
                   </CustomTransition>
-)}
+                )}
               />
             </Route>
           )
@@ -29,7 +29,7 @@ function AppRoutes() {
                 <CustomTransition title={route.title}>
                   {route.element}
                 </CustomTransition>
-)}
+              )}
             />
           )
       ))}

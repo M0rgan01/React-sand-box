@@ -14,10 +14,8 @@ const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 axiosInstance.interceptors.request.use((request) => {
   const storeState = store.getState();
   if (isAuthenticatedSelector(storeState)) {
-    request.headers = {
-      Authorization: `Bearer ${tokenSelector(storeState)}`,
-      'X-Realm': realmSelector(storeState),
-    };
+    request.headers.Authorization = `Bearer ${tokenSelector(storeState)}`;
+    request.headers['X-Realm'] = realmSelector(storeState);
   }
   return request;
 }, (error) => Promise.reject(error));

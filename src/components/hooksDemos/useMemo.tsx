@@ -1,6 +1,11 @@
 // https://www.youtube.com/watch?v=wNX5iRhczHM&list=PLjwdMgw5TTLWom67YfZuha-1iYzIirwJR&index=18
 import React, { useMemo, useState } from 'react';
-import { Box, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  TextField,
+  Typography,
+} from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { Sync } from '@mui/icons-material';
 import ComponentTitle from '../common/ComponentTitle';
 
@@ -31,33 +36,39 @@ export default function UseMemoDemo() {
   return (
     <>
       <ComponentTitle title="Use memo demonstration" icon={<Sync fontSize="large" />} />
-      <Typography variant="h5">
-        Update number for trigger update in components
-      </Typography>
-      <TextField
-        sx={{ my: 3 }}
-        margin="dense"
-        fullWidth
-        label="Number"
-        type="number"
-        id="number"
-        value={number}
-        name="number"
-        onChange={(e) => onUpdateNumber(e.target.value)}
-      />
-      <Typography variant="h5">
-        Update String for trigger update in components
-      </Typography>
-      <TextField
-        sx={{ my: 3 }}
-        margin="dense"
-        fullWidth
-        label="String"
-        id="string"
-        value={string}
-        name="string"
-        onChange={(e) => onUpdateString(e.target.value)}
-      />
+      <Grid container spacing={1}>
+        <Grid xs={6}>
+          <Typography variant="h5">
+            Update number for trigger update in components
+          </Typography>
+          <TextField
+            sx={{ my: 3 }}
+            margin="dense"
+            fullWidth
+            label="Number"
+            type="number"
+            id="number"
+            value={number}
+            name="number"
+            onChange={(e) => onUpdateNumber(e.target.value)}
+          />
+        </Grid>
+        <Grid xs={6}>
+          <Typography variant="h5">
+            Update String for trigger update in components
+          </Typography>
+          <TextField
+            sx={{ my: 3 }}
+            margin="dense"
+            fullWidth
+            label="String"
+            id="string"
+            value={string}
+            name="string"
+            onChange={(e) => onUpdateString(e.target.value)}
+          />
+        </Grid>
+      </Grid>
       <Typography variant="h5">
         Components with useMemo
       </Typography>

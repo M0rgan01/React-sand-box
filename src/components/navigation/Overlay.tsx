@@ -54,7 +54,7 @@ const overlayClass: SxProps<Theme> = {
   left: 0,
   width: '100%',
   height: '100vh',
-  animation: 'overlayTransition 500ms ease-in',
+  animation: 'overlayTransition 200ms ease-in',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
