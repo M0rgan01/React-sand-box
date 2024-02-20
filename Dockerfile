@@ -9,7 +9,7 @@ RUN yarn build --mode ${NODE_ENV}
 
 FROM nginx:1.16.0-alpine
 
-LABEL org.opencontainers.image.source=https://github.com/m0rgan01/React-sand-box
+LABEL org.opencontainers.image.source=https://github.com/m0rgan01/react-sand-box
 COPY ./static_nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/React-sand-box/build /var/www/
 
