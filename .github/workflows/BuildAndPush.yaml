@@ -32,7 +32,7 @@ jobs:
             NODE_ENV=prod
           file: Dockerfile
           push: true
-          tags: ghcr.io/m0rgan01/React-sand-box:main
+          tags: ghcr.io/m0rgan01/react-sand-box:main
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
