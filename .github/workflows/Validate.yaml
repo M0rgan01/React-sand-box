@@ -1,0 +1,23 @@
+name: Build and push
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  lint:
+    name: Lint project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn run lint

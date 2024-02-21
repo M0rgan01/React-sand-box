@@ -53,53 +53,6 @@
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "es2021": true
-    },
-    "extends": [
-      "plugin:react/recommended",
-      "airbnb",
-      "react-app",
-      "react-app/jest"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 13,
-      "sourceType": "module"
-    },
-    "plugins": [
-      "react",
-      "@typescript-eslint"
-    ],
-    "rules": {
-      "no-console": "off",
-      "import/no-unresolved": "off",
-      "import/extensions": "off",
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".tsx",
-            ".ts"
-          ]
-        }
-      ],
-      "react/prop-types": "off",
-      "react/no-array-index-key": "off",
-      "react/jsx-props-no-spreading": "off",
-      "react/require-default-props": "off",
-      "no-shadow": "off",
-      "no-underscore-dangle": "off",
-      "@typescript-eslint/no-shadow": [
-        "error"
-      ]
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
