@@ -38,3 +38,13 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn lint`
+
+Static analysis of code, relative to the configuration specified in the file [.eslintrc.json](.eslintrc.json).
+
+Adding a `fix` option allows errors to be directly corrected, when possible.
+
+```shell
+$ yarn lint --fix
+```
